@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,6 +19,8 @@ import com.example.order.Adapter.ViewPagerAdapter;
 import com.example.order.Menu;
 import com.example.order.R;
 import com.google.android.material.tabs.TabLayout;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -29,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     public MenuAdapter menuAdapter;
     private List<Menu> mlistfood;
+    public static String  idTable;
+    public final static String titleTable = "Table";
 
 
     @Override
@@ -43,27 +50,24 @@ public class MainActivity extends AppCompatActivity {
         mviewPager.setAdapter(viewPagerAdapter);
         mtabLayout.setupWithViewPager(mviewPager);
 
-        //intitview();
     }
-
-//    private void intitview() {
-//        mlistfood=new ArrayList<>();
-//        for(int i=0;i<5;i++){
-//            mlistfood.add(new Menu("food_1",R.drawable.cha_hai_san_boc_xa_nuong));
-//            mlistfood.add(new Menu("food_2",R.drawable.nen_nuong));
-//            mlistfood.add(new Menu("food_3",R.drawable.nen_nuong));
-//
-//        }
-//        recyclerView = (RecyclerView) findViewById(R.id.recyvleview);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        menuAdapter=new MenuAdapter(mlistfood);
-//        recyclerView.setAdapter(menuAdapter);
-//    }
 
     final int flag = 0;
 
-    public void tableorder(View view) {
+
+    @SuppressLint("ResourceType")
+    public void table_Order(View view) {
+
+        Intent i = new Intent(MainActivity.this, Order_Activity.class);
+
+        startActivity(i);
+        Log.d("user clicked order", "user clicked");
+        Button btn = (Button) view;
+        idTable = btn.getText().toString();
+
+        Intent intent = new Intent(MainActivity.this,Order_Activity.class);
+        intent.putExtra(titleTable,idTable);
+        startActivity(intent);
 
     }
 }
