@@ -1,70 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/cha_hai_san_boc_xa_nuong"
-        android:id="@+id/image_view_food"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp">
 
-    </ImageView>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp">
-        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/no_image">
+
+            </ImageView>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="34dp"
-            android:text="Name"
-            android:layout_marginTop="8dp">
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
 
-        </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Name: "
+                android:textSize="34dp">
 
-        <TextView
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Price: "
+                android:textSize="34dp">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="34dp"
-            android:text="Price"
-            android:layout_marginTop="10dp">
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
 
-        </TextView>
+            <TextView
+                android:id="@+id/txt_name_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Name"
+                android:textSize="34dp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_food_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Price"
+                android:textSize="34dp">
+
+            </TextView>
+
+        </LinearLayout>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="34dp"
-            android:text="Name"
-            android:layout_marginTop="8dp"
-            android:id="@+id/txt_name_food">
-
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="34dp"
-            android:text="Price"
-            android:layout_marginTop="10dp"
-            android:id="@+id/txt_food_price">
-
-        </TextView>
-
-    </LinearLayout>
-
-
 
 
 </LinearLayout>

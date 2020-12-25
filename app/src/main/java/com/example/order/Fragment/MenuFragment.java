@@ -5,23 +5,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.order.Adapter.MenuAdapter;
+import com.example.order.Data.DBManager;
 import com.example.order.Menu;
 import com.example.order.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
+
 
 public class MenuFragment extends Fragment {
 
 
-    private RecyclerView recyclerView;
+    private RecyclerView rvMenu;
     private List<Menu> menuList;
     private MenuAdapter menuAdapter;
 
@@ -37,10 +39,10 @@ public class MenuFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.food_recycleview);
-        MenuAdapter menuAdapter = new MenuAdapter(getContext(), menuList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(menuAdapter);
+        rvMenu = (RecyclerView) view.findViewById(R.id.rv_menufood);
+        menuAdapter = new MenuAdapter(getContext(), menuList);
+        rvMenu.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvMenu.setAdapter(menuAdapter);
 
 
         return view;
@@ -48,16 +50,19 @@ public class MenuFragment extends Fragment {
 
     private void initData() {
         menuList = new ArrayList<>();
-for(int i=0;i<20;i++){
-    menuList.add(new Menu("food_"+i, R.drawable.nen_nuong, "100"+i));
+        DBManager dbManager = new DBManager(getContext());
 
-}
+        //lay danh sach ban tu database
+        menuList = dbManager.selectListMenu();
+//        if (menuList.size() == 0) {
+//            Toast.makeText(getContext(), "danh sach ban trong", Toast.LENGTH_SHORT).show();
+//        }
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         initData();
     }
 
