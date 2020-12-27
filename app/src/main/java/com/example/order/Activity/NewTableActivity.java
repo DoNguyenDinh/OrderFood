@@ -34,6 +34,8 @@ public class NewTableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_table);
         anhxa();
+
+        setTitle(R.string.new_table);
     }
 
 

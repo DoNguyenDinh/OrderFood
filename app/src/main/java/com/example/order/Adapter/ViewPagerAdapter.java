@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.example.order.Fragment.MenuFragment;
 import com.example.order.Fragment.OrderFragment;
 import com.example.order.Fragment.ReportFragment;
+import com.example.order.Fragment.StaffFragment;
 import com.example.order.Fragment.TableFragment;
 
 
@@ -30,6 +31,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 return new MenuFragment();
             case 3:
                 return new ReportFragment();
+            case 4:
+                return new StaffFragment();
             default:
                 return new OrderFragment();
         }
@@ -37,7 +40,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 5;
     }
 
     @Nullable
@@ -56,6 +59,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 break;
             case 3:
                 title = "Report";
+                break;
+            case 4:
+                title="Staff";
         }
         return title;
     }

@@ -51,20 +51,8 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MenuViewHold
 
 
         holder.mNameTable.setText(mMenu.getNameTable());
-        //holder.id.setText(mMenu.getId());
 
-//        holder.mNameTable.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("click", position + " Clicked");
-//
-//                Intent i = new Intent(context, Order_Activity.class);
-//                i.putExtra("keyname", position);
-//
-//                context.startActivity(i);
-//
-//            }
-//        });
+
     }
 
 
@@ -91,12 +79,12 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MenuViewHold
                     pos = getLayoutPosition();
 
 
-                   Toast.makeText(context,pos+"",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, pos + "", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(context, Order_Activity.class);
-                    Bundle bundle=new Bundle();
-                    bundle.putString("keyname",pos+1+"");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("keyname", pos + 1 + "");
 
-                   i.putExtras(bundle);
+                    i.putExtras(bundle);
                     context.startActivity(i);
                 }
             });

@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,6 +30,8 @@ public class NewFoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_food);
 
+
+        setTitle(R.string.new_food);
         anhxa();
     }
 
@@ -42,10 +46,9 @@ public class NewFoodActivity extends AppCompatActivity {
 
         String name = edtName.getText().toString();
         String price = edtPrice.getText().toString();
-        if (name.matches("")||price.matches("")) {
+        if (name.matches("") || price.matches("")) {
             Toast.makeText(getApplicationContext(), "chua nhap", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             DBManager dbManager = new DBManager(this);
 
             Menu menu = createMenu();
@@ -55,15 +58,17 @@ public class NewFoodActivity extends AppCompatActivity {
 
             Log.d("click", "info was save");
 
-            Toast.makeText(this,"Them thanh cong",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Them thanh cong", Toast.LENGTH_SHORT).show();
             startActivity(i);
 
         }
     }
+
+
     private Menu createMenu() {
         String name = edtName.getText().toString();
         String price = edtPrice.getText().toString();
-        Menu table = new Menu(name,price);
+        Menu table = new Menu(name, price);
         return table;
     }
 }

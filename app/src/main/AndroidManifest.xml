@@ -9,10 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.NewTableActivity"></activity>
+
+
+        <!--declare activity in app-->
+        <activity android:name=".Activity.MainActivity"></activity>
+        <activity android:name=".Activity.SignupActivity"></activity>
+        <activity android:name=".Activity.NewTableActivity" />
         <activity android:name=".Activity.NewFoodActivity" />
         <activity android:name=".Activity.Order_Activity" />
-        <activity android:name=".Activity.MainActivity">
+
+        <!-- Activity start firts -->
+        <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

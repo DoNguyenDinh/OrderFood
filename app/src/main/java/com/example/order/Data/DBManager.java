@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.order.Menu;
+import com.example.order.Staff;
 import com.example.order.Table;
 
 import java.util.ArrayList;
@@ -18,25 +19,48 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     static final String DATABASE_NAME = "Restaurant";
-    static String TABLE_NAME = "tablefood";
-    static String ID = "id";
-    public static String NAME = "name";
-    public String PRICE = "price";
-    public String TB_MENU = "menu";
+
+
+    public String TB_MENU = "thucdon";
+    public String PRICE = "gia";
+    static String ID_FOOD = "mamonan";
+    public String NAME_FOOD = "tenmonan";
+
+
+    static String TB_TABLEFOOD = "banan";
+    static String ID_TABLE = "mabanan";
+    public String NAME_TABLE = "tenbanan";
+
+
+    public String TB_ORDER = "datmon";
+    static String ID_ORDER = "madatmon";
+
+
+    public String TB_STAFF = "nhanvien";
+    public String ID_STAFF = "manv";
+    public String NAME_STAFF = "tennv";
+    public String PASS = "matkhau";
+    public String RULE = "quyen";
 
     public DBManager(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 3);
     }
 
 
-    private String createTableFood = "CREATE TABLE " + TABLE_NAME + " (" +
-            ID + " INTEGER PRIMARY KEY, " +
-            NAME +" TEXT)";
+    private String createTableFood = "CREATE TABLE " + TB_TABLEFOOD + " (" +
+            ID_TABLE + " INTEGER PRIMARY KEY, " +
+            NAME_TABLE + " TEXT)";
 
     private String createMenuFood = "CREATE TABLE " + TB_MENU + " (" +
-            ID + " INTEGER PRIMARY KEY, " +
-            NAME +" TEXT,"+
+            ID_FOOD + " INTEGER PRIMARY KEY, " +
+            NAME_FOOD + " TEXT," +
             PRICE + " Text)";
+
+    private String createStaff = "CREATE TABLE " + TB_STAFF + " ( " +
+            ID_STAFF + " INTEGER PRIMARY KEY, " +
+            NAME_STAFF + " TEXT, " +
+            PASS + " TEXT, " +
+            RULE + " TEXT default 1)";
 
 
     @Override
@@ -45,6 +69,8 @@ public class DBManager extends SQLiteOpenHelper {
         //khởi tạo bảng
         db.execSQL(createTableFood);
         db.execSQL(createMenuFood);
+        db.execSQL(createStaff);
+
     }
 
     @Override
@@ -57,7 +83,7 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-    //them ban an
+    //add table food
     public void addTableFood(Table table) {
         //mo ket noi database
         SQLiteDatabase db = this.getWritableDatabase();
@@ -65,17 +91,17 @@ public class DBManager extends SQLiteOpenHelper {
 
         //luu gia tri xuong database
         ContentValues values = new ContentValues();
-        values.put(NAME, table.getNameTable());
-        db.insert(TABLE_NAME, null, values);
+        values.put(NAME_TABLE, table.getNameTable());
+        db.insert(TB_TABLEFOOD, null, values);
 
         //dong ket noi
         db.close();
     }
 
 
-    //lay danh sach ban an
+    //get list table food
     public List<Table> selectListTable() {
-        String query_selectall = "Select * from " + TABLE_NAME;
+        String query_selectall = "Select * from " + TB_TABLEFOOD;
         List<Table> listTable = new ArrayList<>();
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -96,16 +122,14 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-
-
-    //them mon an
+    //add food
     public void addFood(Menu table) {
         //mo ket noi database
         SQLiteDatabase db = this.getWritableDatabase();
 
         //luu gia tri xuong database
         ContentValues values = new ContentValues();
-        values.put(NAME, table.getNameFood());
+        values.put(NAME_FOOD, table.getNameFood());
         values.put(PRICE, table.getPrice());
         db.insert(TB_MENU, null, values);
 
@@ -114,7 +138,7 @@ public class DBManager extends SQLiteOpenHelper {
         db.close();
     }
 
-    //lay danh sach mon an
+    //get list table food
     public List<Menu> selectListMenu() {
 
         String query_selectall = "Select * from " + TB_MENU;
@@ -139,11 +163,9 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-
-
-    //xoa het danh sach ban an
+    //delete all list table food
     public List<Table> deleteTable() {
-        String query_selectall = "DELETE FROM " + TABLE_NAME +" where id=2";
+        String query_selectall = "DELETE FROM " + TB_TABLEFOOD + " where id=2";
         List<Table> listTable = new ArrayList<>();
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -163,4 +185,87 @@ public class DBManager extends SQLiteOpenHelper {
         return listTable;
     }
 
+
+    //create new user
+    public void addNewUser(Staff staff) {
+        //mo ket noi database
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //luu gia tri xuong database
+        ContentValues values = new ContentValues();
+        values.put(NAME_STAFF, staff.getUserName());
+        values.put(PASS, staff.getPassword());
+        db.insert(TB_STAFF, null, values);
+
+        //dong ket noi
+        db.close();
+    }
+
+
+    //get list staff
+    public List<Staff> selectListStaff() {
+
+        String query_selectall = "Select * from " + TB_STAFF;
+        List<Staff> listStaff = new ArrayList<>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query_selectall, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Staff staff = new Staff();
+
+                staff.setId(cursor.getInt(0));
+                staff.setUserName(cursor.getString(1));
+                staff.setPassword(cursor.getString(2));
+
+                listStaff.add(staff);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return listStaff;
+    }
+
+    //get account
+    public List<Staff> getAccount(String name, String pass) {
+
+        String query_selectall = "Select * from " + TB_STAFF + " where tennv = '" + name + "' and matkhau= '" + pass + "'";
+        List<Staff> listStaff = new ArrayList<>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query_selectall, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Staff staff = new Staff();
+
+                staff.setId(cursor.getInt(0));
+                staff.setUserName(cursor.getString(1));
+                staff.setPassword(cursor.getString(2));
+
+                listStaff.add(staff);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return listStaff;
+    }
+
+
+    //get id login
+    public int GetId(String name, String pass) {
+        SQLiteDatabase myDB = this.getWritableDatabase();
+
+        String sql = "Select manv from " + TB_STAFF + " where tennv = '" + name + "' and matkhau= '" + pass + "'";
+        Cursor getIdAccount = myDB.rawQuery(sql, null);
+        return getIdAccount.getColumnIndex("manv");
+    }
+
+    //get name login
+    public String getNameLogin(int id){
+        SQLiteDatabase myDB = this.getWritableDatabase();
+
+        String sql = "Select tennv from " + TB_STAFF + " where manv = " + id  ;
+        Cursor getCursor = myDB.rawQuery(sql, null);
+        return String.valueOf(getCursor.getColumnIndex("tennv"));
+    }
 }

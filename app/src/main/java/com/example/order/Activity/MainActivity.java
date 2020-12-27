@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Menu> mlistFood = new ArrayList<>();
     public static String idTable;
     public final static String titleTable = "Table";
-    public TextView txtID;
+    public static int idStaff = 0;
 
 
     @Override
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         anhxa();
-        // txtID = (TextView) findViewById(R.id.id_table);
+
     }
 
     private void anhxa() {
@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mviewPager.setAdapter(viewPagerAdapter);
         mtabLayout.setupWithViewPager(mviewPager);
+
+      //  getData();
     }
 
 
@@ -68,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, Order_Activity.class);
         intent.putExtra(titleTable, idTable);
         startActivity(intent);
+
+    }
+
+    //get id login
+    void getData() {
+        Intent intent = getIntent();
+        Bundle bundle = getIntent().getExtras();
+
+        idStaff = bundle.getInt("idLogin");
 
     }
 
