@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.order.Adapter.MenuAdapter;
 import com.example.order.Adapter.ViewPagerAdapter;
@@ -32,20 +33,22 @@ public class MainActivity extends AppCompatActivity {
     private List<Menu> mlistFood = new ArrayList<>();
     public static String idTable;
     public final static String titleTable = "Table";
-    public static int idStaff = 0;
+    public static String idStaff,nameStaff;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         anhxa();
+
+
 
     }
 
     private void anhxa() {
-
-
         mtabLayout = findViewById(R.id.tablayout);
         mviewPager = findViewById(R.id.viewpager);
 
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         mviewPager.setAdapter(viewPagerAdapter);
         mtabLayout.setupWithViewPager(mviewPager);
 
-      //  getData();
+
     }
 
 
@@ -62,28 +65,25 @@ public class MainActivity extends AppCompatActivity {
 
         Intent i = new Intent(MainActivity.this, Order_Activity.class);
 
-        startActivity(i);
-        Log.d("user clicked order", "user clicked");
-        Button btn = (Button) view;
-        idTable = btn.getText().toString();
 
-        Intent intent = new Intent(MainActivity.this, Order_Activity.class);
-        intent.putExtra(titleTable, idTable);
-        startActivity(intent);
+        startActivity(i);
 
     }
 
-    //get id login
-    void getData() {
+    //lấy id nhân viên đăng nhập
+    void getData(String name, String manv) {
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
 
-        idStaff = bundle.getInt("idLogin");
+        manv= bundle.getString("idLogin");
+        name = bundle.getString("nameLogin");
 
     }
 
 
-    //open NewFoodActivy
+
+
+    //mở activity thêm món ăn
     public void newFood(View view) {
 
         Intent intent = new Intent(MainActivity.this, NewFoodActivity.class);
@@ -91,10 +91,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //open NewTableActivity
+    //mở activity thêm bàn ăn
     public void newTable(View view) {
 
         Intent intent = new Intent(MainActivity.this, NewTableActivity.class);
         startActivity(intent);
+    }
+
+    //mỏ activity đăng nhập
+    public void logout(View view) {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+
+    //thanh toán tiền hóa đơn
+    public void payMoney(View view) {
+     //startActivity(new Intent(MainActivity.this,PayActivity.class));
     }
 }

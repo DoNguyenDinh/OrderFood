@@ -44,10 +44,9 @@ public class MenuFragment extends Fragment {
         menuAdapter = new MenuAdapter(getContext(), menuList);
         rvMenu.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMenu.setAdapter(menuAdapter);
+        rvMenu.setHasFixedSize(true);
 
 
-
-//        getActivity().setTitle("Thuc don");
         return view;
     }
 
@@ -57,9 +56,7 @@ public class MenuFragment extends Fragment {
 
         //lay danh sach ban tu database
         menuList = dbManager.selectListMenu();
-//        if (menuList.size() == 0) {
-//            Toast.makeText(getContext(), "danh sach ban trong", Toast.LENGTH_SHORT).show();
-//        }
+
 
     }
 

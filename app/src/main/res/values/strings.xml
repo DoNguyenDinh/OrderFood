@@ -2,8 +2,8 @@
     <string name="app_name">Order Food</string>
 
     <string name="new_food">New Food</string>
-    <string name="new_table">New Food</string>
-    <string name="Order">New Food</string>
+    <string name="new_table">New Table</string>
+    <string name="Order">Order Food</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -19,6 +19,17 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="register">Register</string>
+    <string name="login">LOGIN</string>
+    <string name="nhanvien">Nhan Vien</string>
+    <string name="banan">Danh sach ban an</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="pay">Thanh toan hoa don</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

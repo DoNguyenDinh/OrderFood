@@ -9,5 +9,7 @@
     <color name="cyan">#00ffff</color>
     <color name="custom">#35C910</color>
     <color name="red">#FF0000</color>
+    <color name="rv_list_food">#99ebff</color>
+    <color name="silver">#BFBFBF</color>
 
 </resources>

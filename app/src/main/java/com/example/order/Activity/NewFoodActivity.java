@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.order.Data.DBManager;
+import com.example.order.Fragment.MenuFragment;
 import com.example.order.Menu;
 import com.example.order.R;
 import com.example.order.Table;
@@ -30,7 +31,6 @@ public class NewFoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_food);
 
-
         setTitle(R.string.new_food);
         anhxa();
     }
@@ -42,6 +42,8 @@ public class NewFoodActivity extends AppCompatActivity {
     }
 
 
+
+    //save food to database
     public void save_Food(View view) {
 
         String name = edtName.getText().toString();
@@ -52,23 +54,29 @@ public class NewFoodActivity extends AppCompatActivity {
             DBManager dbManager = new DBManager(this);
 
             Menu menu = createMenu();
-            dbManager.addFood(menu);
+          long check= dbManager.addFood(menu);
+          if(check>0){
+              Toast.makeText(this, "Them thanh cong", Toast.LENGTH_SHORT).show();
 
-            Intent i = new Intent(this, MainActivity.class);
+          }
+          else {
+              Toast.makeText(this, "Them that bai?!!", Toast.LENGTH_SHORT).show();
 
-            Log.d("click", "info was save");
-
-            Toast.makeText(this, "Them thanh cong", Toast.LENGTH_SHORT).show();
-            startActivity(i);
+          }
 
         }
     }
 
-
+//create new food
     private Menu createMenu() {
         String name = edtName.getText().toString();
         String price = edtPrice.getText().toString();
         Menu table = new Menu(name, price);
         return table;
+    }
+
+    //back to main activity
+    public void cancel_food(View view) {
+        startActivity(new Intent(this,MainActivity.class));
     }
 }

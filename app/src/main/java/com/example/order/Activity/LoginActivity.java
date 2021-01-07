@@ -1,6 +1,7 @@
 package com.example.order.Activity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtUserName, edtPassWord;
     Button btnLogin, btnSignup;
     List<Staff> staffList;
-    int ma_nhan_vien=0;
-
+    public static int ma_nhan_vien=0;
+    public static String ten_nv;
 
 
     @Override
@@ -32,21 +33,18 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_layout);
 
 
-        setTitle("LOGIN");
+        setTitle(R.string.login);
         anhxa();
     }
 
-    public List getListStaff(String name,String pass) {
+    public List getListStaff(String name, String pass) {
 
         staffList = new ArrayList<>();
         DBManager db = new DBManager(getApplicationContext());
-        staffList = db.getAccount(name,pass);
-        ma_nhan_vien=db.GetId(name,pass);
-
+        staffList = db.getAccount(name, pass);
 
         return staffList;
     }
-
 
 
     public void login(View view) {
@@ -54,18 +52,23 @@ public class LoginActivity extends AppCompatActivity {
         String name = edtUserName.getText().toString();
         String pass = edtPassWord.getText().toString();
 
-
-
+        DBManager db = new DBManager(getApplicationContext());
         if (name.matches("") || pass.matches("")) {
             Toast.makeText(getApplicationContext(), "chua nhap", Toast.LENGTH_SHORT).show();
         } else {
-            if (getListStaff(name,pass).size() == 0) {
+            if (getListStaff(name, pass).size() == 0) {
                 Toast.makeText(getApplicationContext(), "tai khoan khong ton tai", Toast.LENGTH_SHORT).show();
             } else {
                 Intent i = new Intent(this, MainActivity.class);
 
-                Bundle bundle=new Bundle();
-                bundle.putInt("idLogin",ma_nhan_vien);
+                Cursor cs = db.GetId(name, pass);
+                cs.moveToFirst();
+                //ma_nhan_vien = Integer.parseInt(cs.getString(0));
+                ten_nv = cs.getString(1);
+                ma_nhan_vien=cs.getInt(0);
+                Toast.makeText(getApplicationContext(), "Chao mung ban : " + ten_nv, Toast.LENGTH_SHORT).show();
+
+
                 startActivity(i);
             }
         }

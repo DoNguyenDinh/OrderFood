@@ -26,7 +26,7 @@ public class SignupActivity extends AppCompatActivity {
         DBManager db = new DBManager(getApplicationContext());
 
         anhxa();
-        setTitle("SIGN UP");
+        setTitle(R.string.register);
     }
 
     private void anhxa() {
@@ -45,7 +45,7 @@ public class SignupActivity extends AppCompatActivity {
         String s2 = edt_RePassword.getText().toString();
 
         //kiem tra gia tri nhap co rong khong
-        if (s2.matches("")) {
+        if (s2.matches("")|s1.matches("")||s.matches("")) {
             Toast.makeText(getApplicationContext(), "chua nhap du lieu", Toast.LENGTH_SHORT).show();
         } else {
 
@@ -53,13 +53,13 @@ public class SignupActivity extends AppCompatActivity {
                 DBManager dbManager = new DBManager(getApplicationContext());
                 if(dbManager==null){
                     Toast.makeText(getApplicationContext(), "DB NUll", Toast.LENGTH_SHORT).show();
+                }else {
+                    Staff staff = createAccount();
+                    dbManager.addNewUser(staff);
+
+                    Intent i = new Intent(this, LoginActivity.class);
+                    startActivity(i);
                 }
-
-                Staff staff = createAccount();
-                dbManager.addNewUser(staff);
-
-                Intent i = new Intent(this, LoginActivity.class);
-                startActivity(i);
             } else {
                 Toast.makeText(getApplicationContext(), "ReEnter Confirm Password ", Toast.LENGTH_SHORT).show();
 
@@ -77,7 +77,7 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
-    //tao nhan vien
+    //tao nhan vien moi
     private Staff createAccount() {
         String nameStaff = edt_UserName.getText().toString();
         String password = edt_PassWord.getText().toString();

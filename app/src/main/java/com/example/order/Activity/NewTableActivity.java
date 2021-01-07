@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.order.Adapter.TableAdapter;
 import com.example.order.Data.DBManager;
+import com.example.order.Fragment.TableFragment;
 import com.example.order.R;
 import com.example.order.Table;
 
@@ -48,15 +49,14 @@ public class NewTableActivity extends AppCompatActivity {
             DBManager dbManager = new DBManager(NewTableActivity.this);
 
             Table table = createTable();
-            dbManager.addTableFood(table);
+           long checkResult = dbManager.addTableFood(table);
 
-            Intent i = new Intent(this, MainActivity.class);
+           if(checkResult>0) {
+               Toast.makeText(this, "Them thanh cong", Toast.LENGTH_SHORT).show();
+           }else {
+               Toast.makeText(this, "Them that bai ", Toast.LENGTH_SHORT).show();
 
-            Log.d("click", "info was save");
-
-            startActivity(i);
-            Toast.makeText(this, "Them thanh cong", Toast.LENGTH_SHORT).show();
-
+           }
 
         }
     }
@@ -75,14 +75,6 @@ public class NewTableActivity extends AppCompatActivity {
         rvTable = (RecyclerView) findViewById(R.id.rv_table);
     }
 
-    void setAdapter() {
-        if (tableAdapter == null) {
-            Toast.makeText(getApplicationContext(), "tableadapter null", Toast.LENGTH_SHORT).show();
-        } else {
-
-        }
-        rvTable.setAdapter(tableAdapter);
-    }
 
     public void cancel_table(View view) {
         Intent i = new Intent(this, MainActivity.class);
