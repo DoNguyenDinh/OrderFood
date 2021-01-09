@@ -24,7 +24,7 @@ public class DBManager extends SQLiteOpenHelper {
     static final String DATABASE_NAME = "Restaurant";
     static final int VERSION = 7;
 
-    //loai monan
+    //loai mon an
     public String TB_FOOD_TYPE = "loaimonan";
     public String ID_FOOD_TYPE = "maloai";
     public String NAME_FOOD_TYPE = "tenmaloai";
@@ -55,8 +55,8 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     //table banan
-    static String TB_TABLEFOOD = "banan";
-    static String ID_TABLE = "mabanan";
+    public String TB_TABLEFOOD = "banan";
+    public String ID_TABLE = "mabanan";
     public String NAME_TABLE = "tenbanan";
     public String STATUS_TABLE = "trangthai";
     private String createTableFood = "CREATE TABLE " + TB_TABLEFOOD + " (" +
@@ -142,6 +142,8 @@ public class DBManager extends SQLiteOpenHelper {
         return db;
     }
 
+
+    //them dat mon moi
     public long addOrder(Order table) {
         //mo ket noi database
         SQLiteDatabase db = this.getWritableDatabase();
@@ -158,24 +160,25 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-    //add table food
-    public long addTableFood(Table table) {
-        //mo ket noi database
+    //lay danh sach loai mon an
+
+    List<String> listFoodStyle() {
         SQLiteDatabase db = this.getWritableDatabase();
+        String select = "Select * from " + TB_FOOD_TYPE;
+        List<String> list = new ArrayList<>();
 
+        Cursor cs=db.rawQuery(select,null);
+        if (cs.moveToFirst()){
+            do {
 
-        //luu gia tri xuong database
-        ContentValues values = new ContentValues();
-        values.put(NAME_TABLE, table.getNameTable());
-        long result = db.insert(TB_TABLEFOOD, null, values);
+                list.add(cs.getString(1));
+            } while (cs.moveToNext());
+        }
 
-        //dong ket noi
-        db.close();
-        return result;
+        return list;
     }
 
-
-    //get list ordered
+    //lay danh sach da dat mon
     public List<Order> selectListOrdered() {
         String query_selectall = "Select * from " + TB_ORDER + " where " + STATUS_ORDER + " = 1";
         List<Order> listTable = new ArrayList<>();
@@ -198,49 +201,7 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-    //get list table food
-    public List<Table> selectListTable() {
-        String query_selectall = "Select * from " + TB_TABLEFOOD;
-        List<Table> listTable = new ArrayList<>();
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query_selectall, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Table table = new Table();
-
-                table.setId(cursor.getInt(0));
-                table.setNameTable(cursor.getString(1));
-
-                listTable.add(table);
-            } while (cursor.moveToNext());
-        }
-        db.close();
-        return listTable;
-    }
-
-
-    //add food
-    public long addFood(Menu table) {
-        //mo ket noi database
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        //luu gia tri xuong database
-        ContentValues values = new ContentValues();
-        values.put(NAME_FOOD, table.getNameFood());
-        values.put(PRICE_FOOD, table.getPrice());
-        long result = db.insert(TB_MENU, null, values);
-
-        //dong ket noi
-        db.close();
-
-        return result;
-    }
-
-
     //cap nhat trang thai dat mon
-
     public void updateStatusorder(int iddatmon) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -250,35 +211,7 @@ public class DBManager extends SQLiteOpenHelper {
 
     }
 
-    //lay trang thai ban an
-    public Cursor getTableStatus(int idbanan) {
-        SQLiteDatabase myDB = this.getWritableDatabase();
-
-        String sql = "Select * from " + TB_TABLEFOOD + " where mabanan = " + idbanan;
-        Cursor cs = myDB.rawQuery(sql, null);
-
-
-        return cs;
-    }
-
-
-    //cap nhat trang thai ban an
-    public void updateTableStatus(int banan, boolean statusTable) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String update_db = "";
-        boolean changeStatus = statusTable;
-        if (changeStatus) {
-            update_db = "update " + TB_TABLEFOOD + " set " + STATUS_TABLE + "= 0 where " + ID_TABLE + " = " + banan;
-        } else {
-            update_db = "update " + TB_TABLEFOOD + " set " + STATUS_TABLE + "= 1 where " + ID_TABLE + " = " + banan;
-        }
-
-
-        db.execSQL(update_db);
-
-    }
-
-    //get list table food
+    //lay danh sach mon an
     public List<Menu> selectListMenu() {
 
         String query_selectall = "Select * from " + TB_MENU;
@@ -302,32 +235,8 @@ public class DBManager extends SQLiteOpenHelper {
         return listMenu;
     }
 
-
-    //delete all list table food
-    public List<Table> deleteTable() {
-        String query_selectall = "DELETE FROM " + TB_TABLEFOOD + " where id=2";
-        List<Table> listTable = new ArrayList<>();
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query_selectall, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Table table = new Table();
-
-                table.setId(cursor.getInt(0));
-                table.setNameTable(cursor.getString(1));
-
-                listTable.add(table);
-            } while (cursor.moveToNext());
-        }
-        db.close();
-        return listTable;
-    }
-
-
-    //create new user
-    public void addNewUser(Staff staff) {
+    //tao nguoi dung moi
+    public long addNewUser(Staff staff) {
         //mo ket noi database
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -335,38 +244,33 @@ public class DBManager extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(NAME_STAFF, staff.getUserName());
         values.put(PASS_STAFF, staff.getPassword());
-        db.insert(TB_STAFF, null, values);
+        long ck = db.insert(TB_STAFF, null, values);
 
         //dong ket noi
         db.close();
+        return ck;
     }
 
+    //lay danh sach ten dang nhap
+    public List<String> selectListNameUser(String userName) {
 
-    //get list staff
-    public List<Staff> selectListStaff() {
-
-        String query_selectall = "Select * from " + TB_STAFF;
-        List<Staff> listStaff = new ArrayList<>();
+        String query_selectall = "Select * from " + TB_STAFF + " where tennv='" + userName + "'";
+        List<String> listUserName = new ArrayList<>();
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query_selectall, null);
 
         if (cursor.moveToFirst()) {
             do {
-                Staff staff = new Staff();
 
-                staff.setId(cursor.getInt(0));
-                staff.setUserName(cursor.getString(1));
-                staff.setPassword(cursor.getString(2));
-
-                listStaff.add(staff);
+                listUserName.add(cursor.getString(1));
             } while (cursor.moveToNext());
         }
         db.close();
-        return listStaff;
+        return listUserName;
     }
 
-    //get account
+    //lay thong tin dang nhap cua nguoi dung
     public List<Staff> getAccount(String name, String pass) {
 
         String query_selectall = "Select * from " + TB_STAFF + " where tennv = '" + name + "' and matkhau= '" + pass + "'";
@@ -391,7 +295,7 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-    //get id login
+    //lay id dang nhap
     public Cursor GetId(String name, String pass) {
         SQLiteDatabase myDB = this.getWritableDatabase();
 
@@ -411,10 +315,9 @@ public class DBManager extends SQLiteOpenHelper {
         return cs;
     }
 
-    //insert data table chitietdatmon
+    //them du lieu vao chitietdatmon
     public long insertDataDetail(OrderDetail detail) {
         SQLiteDatabase db = this.getWritableDatabase();
-
 
         ContentValues values = new ContentValues();
         values.put(ID_ORDER_ORDER, detail.getIdOrder());
@@ -423,7 +326,6 @@ public class DBManager extends SQLiteOpenHelper {
         long result = db.insert(TB_ORDER_DETAIL, null, values);
 
         db.close();
-
         return result;
     }
 
@@ -437,10 +339,8 @@ public class DBManager extends SQLiteOpenHelper {
         return getCursor;
     }
 
-
     //lay thong tin dat mon de thanh toan
     public List<ShowOrder> getInfo(int iddatmon) {
-
 
         String query_selectall = "select *" +
                 "FROM thucdon " +
@@ -454,17 +354,16 @@ public class DBManager extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
 
-                // listInfo.add(cursor.getString(1));
+
                 ShowOrder staff = new ShowOrder();
-//
+
                 staff.setTenmonan(cursor.getString(1));
                 staff.setSoluong(cursor.getInt(5));
-
 
                 int dongia = cursor.getShort(2);
                 int soluong = cursor.getInt(5);
                 int thanhtien = dongia * soluong;
-//
+
                 staff.setThanhtien(thanhtien);
                 listInfo.add(staff);
             } while (cursor.moveToNext());
@@ -473,10 +372,8 @@ public class DBManager extends SQLiteOpenHelper {
         return listInfo;
     }
 
-
     //lay danh sach mon an theo ma dat mon
     public List<ShowOrder> getDetailOrder(int iddatmon) {
-
 
         String query_selectall = "select *" +
                 "FROM thucdon " +
@@ -490,7 +387,6 @@ public class DBManager extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
 
-
                 ShowOrder staff = new ShowOrder();
 
                 staff.setTenmonan(cursor.getString(1));
@@ -502,40 +398,12 @@ public class DBManager extends SQLiteOpenHelper {
         return listInfo;
     }
 
-    //Lay ma mon an theo ten mon an
-
-    public Cursor getIDFood(String namefood) {
-
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "Select * from " + TB_MENU + " where " + NAME_FOOD + " = '" + namefood + "'";
-        Cursor cs = db.rawQuery(sql, null);
-
-        return cs;
-
-    }
-
-
-    //cap nhat so luong mon an
-    public Cursor updateQuantityFood(int madatmon, int soluong, int mamonan) {
+    //xoa mon an da dat
+    public void deleteFoodOrder(int madatmon, int mamonan) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String sql = "update " + TB_ORDER_DETAIL + " set soluong = " + soluong + " where " + ID_ORDER_ORDER + " = " +
-                madatmon + " and " + ID_FOOD_ORDER + " = " + mamonan ;
-                Cursor cs=db.rawQuery(sql,null);
-        db.execSQL(sql);
-        return cs;
-    }
-
-
-    //xoa mon an theo ma mon an va ma dat mon
-    public void deleteFoodWithValues(int madatmon,int mamonan) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        db.delete(TB_ORDER_DETAIL, " madatmonan =? and mamonan=?",new String[]{madatmon+"",mamonan+""});
-
+        db.delete(TB_ORDER_DETAIL, " madatmonan =? and mamonan=?", new String[]{madatmon + "", mamonan + ""});
 
     }
-
 
 }

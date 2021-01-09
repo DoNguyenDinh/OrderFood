@@ -75,19 +75,24 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                 @Override
                 public void onClick(View v) {
 
+                    DBManager db = new DBManager(context);
 
-//                    int idtable = Integer.parseInt(Order_Activity.txt);
+                    Cursor cs = db.getIDOrder();
+                    cs.moveToFirst();
+                    String idOrder;
+                    idOrder =  cs.getString(0);
+                    int idorder = Integer.parseInt(idOrder);
 
-                       // db.updateTableStatus(idtable, false);
+
                         Intent i = new Intent(context, InputValues.class);
                         i.putExtra("tenmonan", mTextName.getText().toString());
                         i.putExtra("mamonan", mID.getText() + "");
+                        i.putExtra("madatmonan",idorder);
                         context.startActivity(i);
 
-
-
-
                 }
+
+
             });
         }
     }

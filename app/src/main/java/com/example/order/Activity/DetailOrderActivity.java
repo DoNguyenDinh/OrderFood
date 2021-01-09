@@ -41,6 +41,8 @@ public class DetailOrderActivity extends AppCompatActivity {
     public static int madatmon;
     int maban;
 
+
+    //lay du lieu duoc goi tu
     void getData() {
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
@@ -51,19 +53,23 @@ public class DetailOrderActivity extends AppCompatActivity {
 
     }
 
-
+    //khoi tao gia tri cho list
     private void initData() {
         getData();
         orderList = new ArrayList<>();
         DBManager dbManager = new DBManager(getApplicationContext());
-
-
         orderList = dbManager.getDetailOrder(madatmon);
     }
 
     public void themmonanvaods(View view) {
 
-        startActivity(new Intent(this, Order_Activity.class));
+
+        Intent i = new Intent(getApplicationContext(), AddFoodOrder.class);
+
+        i.putExtra("madatmon", madatmon);
+
+
+        startActivity(i);
 
     }
 

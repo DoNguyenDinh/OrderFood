@@ -19,6 +19,7 @@ import com.example.order.Data.DBManager;
 import com.example.order.Order;
 import com.example.order.R;
 import com.example.order.Table;
+import com.example.order.XuLy.XuLyBanAn;
 
 import java.util.List;
 
@@ -84,12 +85,10 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MenuViewHold
                     maban = id.getText().toString();
 
 
-
-
                     //kiem tra trang thai cua ban da duoc dat chua
-                    DBManager db = new DBManager(context);
+                    XuLyBanAn xlBanAn = new XuLyBanAn(context);
                     int id = Integer.parseInt(maban);
-                    Cursor status = db.getTableStatus(id);
+                    Cursor status = xlBanAn.getTableStatus(id);
                     status.moveToFirst();
 
                     int tb = status.getInt(2);
@@ -97,10 +96,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MenuViewHold
 
                         Intent i = new Intent(context, Order_Activity.class);
                         i.putExtra("mabanan", id);
-                         i.putExtra("vitriban", pos);
-
-                 // Toast.makeText(context, "mabanan " + id, Toast.LENGTH_SHORT).show();
-
+                        i.putExtra("vitriban", pos);
 
                         context.startActivity(i);
                     } else {
@@ -111,24 +107,5 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MenuViewHold
             });
         }
 
-
-        private Order createOrder() {
-            Order order = new Order();
-
-            return order;
-        }
-
-        public void newOrder() {
-
-
-            DBManager db = new DBManager(context);
-            Order order = createOrder();
-
-            long i = db.addOrder(order);
-            if (i >= 0) {
-            } else {
-                Toast.makeText(context, "them that bai", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 }

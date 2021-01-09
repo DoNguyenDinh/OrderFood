@@ -16,6 +16,7 @@ import com.example.order.Adapter.PayDisplayAdapter;
 import com.example.order.Data.DBManager;
 import com.example.order.R;
 import com.example.order.ShowOrder;
+import com.example.order.XuLy.XuLyBanAn;
 
 import java.util.List;
 
@@ -72,29 +73,32 @@ public class PayActivity extends AppCompatActivity {
     String txt;
     int maban;
 
+
+    //lay du lieu tu orderadapter
     void getData() {
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
 
         txt = bundle.getString("madatmon");
-        maban=bundle.getInt("maban");
+        maban = bundle.getInt("maban");
 
     }
 
     public void thanhtoan(View view) {
 
         DBManager db = new DBManager(getApplicationContext());
-        int iddatmon = Integer.parseInt(txt);
-       db.updateStatusorder(iddatmon);
 
-//        if (resul > 0) {
-            Toast.makeText(this, "Thanh toan thanh cong", Toast.LENGTH_SHORT).show();
+        XuLyBanAn xlbanAn=new XuLyBanAn(getApplicationContext());
+        int iddatmon = Integer.parseInt(txt);
+        db.updateStatusorder(iddatmon);
+
+
+        Toast.makeText(this, "Thanh toan thanh cong", Toast.LENGTH_SHORT).show();
+
+        //cap nhat lai trang thai ban chua duoc dat
+        xlbanAn.updateTableStatus(maban, true);
+        startActivity(new Intent(this, MainActivity.class));
 //
-        db.updateTableStatus(maban,true);
-            startActivity(new Intent(this, MainActivity.class));
-//
-//        } else {
-//            Toast.makeText(this, "Thanh toan that bai", Toast.LENGTH_SHORT).show();
-//        }
+
     }
 }

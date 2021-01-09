@@ -17,10 +17,11 @@ import com.example.order.Data.DBManager;
 import com.example.order.Menu;
 import com.example.order.OrderDetail;
 import com.example.order.R;
+import com.example.order.XuLy.XuLyBanAn;
 import com.example.order.XuLy.XuLyDatMon;
 
 public class InputValues extends AppCompatActivity {
-    private String nameFood, idOrder, idFood;
+    private String nameFood, idFood;
     private EditText edtQuantity;
     private TextView txtNameFood, txtIDFood;
     private Button btnInsertOrder;
@@ -57,43 +58,46 @@ public class InputValues extends AppCompatActivity {
         int quantity = Integer.parseInt(edtQuantity.getText().toString());
 
 
+        Toast.makeText(getApplicationContext(), "ma dat mon" + idOrder, Toast.LENGTH_SHORT).show();
+
+
+        XuLyBanAn xlBanAn = new XuLyBanAn(getApplicationContext());
+
+
         DBManager db = new DBManager(getApplicationContext());
-
-        Cursor cs = db.getIDOrder();
-        cs.moveToFirst();
-        idOrder =  cs.getString(0);
-        int idorder = Integer.parseInt(idOrder);
-
-
-        Toast.makeText(getApplicationContext(),"ma dat mon"+ idorder, Toast.LENGTH_SHORT).show();
-
-
-      OrderDetail detail = insertData(idorder,idfood, quantity);
+        OrderDetail detail = insertData(idOrder, idfood, quantity);
 
         long checkResult = db.insertDataDetail(detail);
         if (checkResult > 0) {
-            int mabanan=Order_Activity.maban;
-            db.updateTableStatus(mabanan,false);
+            int mabanan = Order_Activity.maban;
+
+            //gan gia tri ban da duoc dat
+            xlBanAn.updateTableStatus(mabanan, false);
+
             Toast.makeText(getApplicationContext(), "them thanh cong", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this,MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
         } else {
             Toast.makeText(getApplicationContext(), "them that bai", Toast.LENGTH_SHORT).show();
         }
     }
 
+    int idOrder;
+
+    //lay gia tri tu menudapter
     void getData() {
         Bundle bundle = getIntent().getExtras();
         nameFood = bundle.getString("tenmonan");
         idFood = bundle.getString("mamonan");
+        idOrder = bundle.getInt("madatmonan");
     }
 
-    //set data Textview
+    //set du lieu cho textview
     void setDataView() {
         txtNameFood.setText(nameFood);
         // txtIDFood.setText();
     }
 
-    //insert food
+    //insert mon an
     OrderDetail insertData(int idorder, int idFood, int quantity) {
 
         OrderDetail detail = new OrderDetail(idorder, idFood, quantity);

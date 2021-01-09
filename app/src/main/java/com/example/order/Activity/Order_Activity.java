@@ -82,16 +82,11 @@ public class Order_Activity extends AppCompatActivity {
     //lay id ban an
     void getData() {
 
-        //
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
 
-//        txt = bundle.getString("madatmon");
         maban = bundle.getInt("mabanan");
-
-
         Toast.makeText(this, "ma ban"+maban, Toast.LENGTH_SHORT).show();
-
 
 //        txt = TableAdapter.maban;
         tableChoose.setText("Please choose food and drink " + "( " + maban + ")");
@@ -101,11 +96,11 @@ public class Order_Activity extends AppCompatActivity {
     //create new order
     private Order createOrder() {
         Order order = new Order(maban);
-
-
         return order;
     }
 
+
+    //them moi dat mon
     public void newOrder(View view) {
 
         //Order or=createOrder();

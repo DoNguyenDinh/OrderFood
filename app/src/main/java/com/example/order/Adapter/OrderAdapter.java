@@ -74,6 +74,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                     Intent i = new Intent(context, PayActivity.class);
                     String madatmon = txtIDOrder.getText() + "";
                     int maban =Integer.parseInt(txtIDTable.getText() + "");
+
                     i.putExtra("madatmon", madatmon);
                     i.putExtra("maban", maban);
                     context.startActivity(i);
@@ -86,8 +87,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 public void onClick(View v) {
                     Intent i = new Intent(context, DetailOrderActivity.class);
                     int madatmon = Integer.parseInt(txtIDOrder.getText() + "");
-                    i.putExtra("madatmon", madatmon);
                     int maban =Integer.parseInt(txtIDTable.getText() + "");
+
+                    i.putExtra("madatmon", madatmon);
                     i.putExtra("maban", maban);
                     context.startActivity(i);
                 }

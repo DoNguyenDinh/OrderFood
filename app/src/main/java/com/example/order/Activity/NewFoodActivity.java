@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,12 +20,14 @@ import com.example.order.Fragment.MenuFragment;
 import com.example.order.Menu;
 import com.example.order.R;
 import com.example.order.Table;
+import com.example.order.XuLy.XuLyMonAn;
 
 public class NewFoodActivity extends AppCompatActivity {
 
     EditText edtName, edtPrice;
     ImageView imgFood;
     Button btnSave, btnAddImage;
+    Spinner spnFoodStyle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +42,10 @@ public class NewFoodActivity extends AppCompatActivity {
         edtName = (EditText) findViewById(R.id.edt_nameFood);
         edtPrice = (EditText) findViewById(R.id.edt_priceFood);
         btnSave = (Button) findViewById(R.id.btn_saveFood);
+        spnFoodStyle=(Spinner)findViewById(R.id.spn_FoodStyle);
     }
 
-
-
-    //save food to database
+    //them mon an moi vao thucdon
     public void save_Food(View view) {
 
         String name = edtName.getText().toString();
@@ -51,10 +53,10 @@ public class NewFoodActivity extends AppCompatActivity {
         if (name.matches("") || price.matches("")) {
             Toast.makeText(getApplicationContext(), "chua nhap", Toast.LENGTH_SHORT).show();
         } else {
-            DBManager dbManager = new DBManager(this);
+            XuLyMonAn xlMonAn=new XuLyMonAn(getApplicationContext());
 
             Menu menu = createMenu();
-          long check= dbManager.addFood(menu);
+          long check= xlMonAn.addFood(menu);
           if(check>0){
               Toast.makeText(this, "Them thanh cong", Toast.LENGTH_SHORT).show();
 
@@ -63,7 +65,6 @@ public class NewFoodActivity extends AppCompatActivity {
               Toast.makeText(this, "Them that bai?!!", Toast.LENGTH_SHORT).show();
 
           }
-
         }
     }
 

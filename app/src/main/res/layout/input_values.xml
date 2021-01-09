@@ -23,7 +23,7 @@
         android:layout_marginTop="65dp"
         android:ems="10"
         android:hint="Eniter Quantity"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/txt_showNameFood"
         app:layout_constraintTop_toBottomOf="@+id/txt_showNameFood" />
 

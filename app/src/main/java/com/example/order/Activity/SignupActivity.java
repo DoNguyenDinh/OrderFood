@@ -13,11 +13,15 @@ import com.example.order.Data.DBManager;
 import com.example.order.R;
 import com.example.order.Staff;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class SignupActivity extends AppCompatActivity {
 
     EditText edt_UserName, edt_PassWord, edt_RePassword;
     Button btnSign;
+    List<String> listUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,36 +49,63 @@ public class SignupActivity extends AppCompatActivity {
         String s2 = edt_RePassword.getText().toString();
 
         //kiem tra gia tri nhap co rong khong
-        if (s2.matches("")|s1.matches("")||s.matches("")) {
+        if (s2.matches("") | s1.matches("") || s.matches("")) {
             Toast.makeText(getApplicationContext(), "chua nhap du lieu", Toast.LENGTH_SHORT).show();
         } else {
+            boolean checkUser=checkUserName(s);
+            if(checkUser){
+                Toast.makeText(getApplicationContext(), "userName da ton tai", Toast.LENGTH_SHORT).show();
 
-            if (checkPassword(s2, s1)) {
-                DBManager dbManager = new DBManager(getApplicationContext());
-                if(dbManager==null){
-                    Toast.makeText(getApplicationContext(), "DB NUll", Toast.LENGTH_SHORT).show();
-                }else {
-                    Staff staff = createAccount();
-                    dbManager.addNewUser(staff);
+            }else {
+                if (checkPassword(s2, s1)) {
+                    DBManager dbManager = new DBManager(getApplicationContext());
+                    if (dbManager == null) {
+                        Toast.makeText(getApplicationContext(), "DB NUll", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Staff staff = createAccount();
+                        long check = dbManager.addNewUser(staff);
+                        if (check > 0) {
 
-                    Intent i = new Intent(this, LoginActivity.class);
-                    startActivity(i);
+                            Intent i = new Intent(this, LoginActivity.class);
+                            Toast.makeText(getApplicationContext(), "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
+
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Dang ky that bai", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "ReEnter Confirm Password ", Toast.LENGTH_SHORT).show();
+
                 }
-            } else {
-                Toast.makeText(getApplicationContext(), "ReEnter Confirm Password ", Toast.LENGTH_SHORT).show();
-
             }
+
         }
     }
 
 
-    //compare password and confirm password
+    //so sanh mat khau va xac nhan mat khau
     boolean checkPassword(String s1, String s2) {
         if (s1.equals(s2)) {
             return true;
         } else {
             return false;
         }
+    }
+
+
+    //kiem tra username da ton tai chua
+    boolean checkUserName(String userName){
+
+        listUser=new ArrayList<>();
+        DBManager db=new DBManager(getApplicationContext());
+
+        listUser= db.selectListNameUser(userName);
+        if (listUser.size()==0){
+            return false;
+        }
+        return true;
     }
 
     //tao nhan vien moi

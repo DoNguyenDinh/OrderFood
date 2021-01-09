@@ -31,7 +31,7 @@
         android:layout_height="52dp"
         android:layout_marginBottom="16dp"
         android:onClick="back_activitymain"
-        android:text="Order"
+        android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

@@ -40,6 +40,7 @@
         <activity android:name=".Activity.PayActivity"/>
         <activity android:name=".Activity.DetailOrderActivity"></activity>
         <activity android:name=".Activity.UpdateQuantityActivity"></activity>
+        <activity android:name=".Activity.AddFoodOrder"></activity>
 
         <!-- Activity start firts -->
         <activity android:name=".Activity.LoginActivity">

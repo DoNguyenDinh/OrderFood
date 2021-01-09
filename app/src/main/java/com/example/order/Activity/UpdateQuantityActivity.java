@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.order.Data.DBManager;
 import com.example.order.R;
+import com.example.order.XuLy.XuLyMonAn;
 
 public class UpdateQuantityActivity extends AppCompatActivity {
     @Override
@@ -28,6 +29,8 @@ public class UpdateQuantityActivity extends AppCompatActivity {
     TextView txtten;
     EditText edtSL;
 
+
+    //set du lieu cho textview
     void setDataView() {
 
         getData();
@@ -41,6 +44,8 @@ public class UpdateQuantityActivity extends AppCompatActivity {
 
     int maban;
 
+
+    //lay du lieu tu orderadapter
     void getData() {
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
@@ -49,33 +54,32 @@ public class UpdateQuantityActivity extends AppCompatActivity {
         solg = bundle.getInt("soluong");
         maban = bundle.getInt("maban");
 
-        //Toast.makeText(this, "ma dat mon an: " + txt, Toast.LENGTH_SHORT).show();
-
     }
 
+
+    //cap nhat lai so luong mon an
     public void update_quantity(View view) {
 
+        String tes = edtSL.getText().toString();
 
-        String tes=edtSL.getText().toString();
+        if (tes.matches("") || tes == null) {
+            Toast.makeText(this, "so luong trong", Toast.LENGTH_SHORT).show();
+        } else {
+            int iddatmon = DetailOrderActivity.madatmon;
 
-       if(tes.matches("")||tes==null){
-           Toast.makeText(this, "so luong trong", Toast.LENGTH_SHORT).show();
-       }else {
-           int iddatmon = DetailOrderActivity.madatmon;
-           DBManager db = new DBManager(getApplicationContext());
-           Cursor cs = db.getIDFood(tenmon);
-           cs.moveToFirst();
+            XuLyMonAn xlMonan=new XuLyMonAn(getApplicationContext());
+            Cursor cs = xlMonan.getIDFood(tenmon);
+            cs.moveToFirst();
 
+            //lay ma mon an
+            int idfood = cs.getInt(0);
 
-           //lay ma mon an
-           int idfood = cs.getInt(0);
+            int solg = Integer.parseInt(edtSL.getText() + "");
 
-           int solg =Integer.parseInt( edtSL.getText()+"");
+            xlMonan.updateQuantityFood(iddatmon, solg, idfood);
 
-           db.updateQuantityFood(iddatmon,solg, idfood);
-
-           startActivity(new Intent(this,MainActivity.class));
-           Toast.makeText(this, "Cap nhat thanh cong", Toast.LENGTH_SHORT).show();
-       }
+            startActivity(new Intent(this, MainActivity.class));
+            Toast.makeText(this, "Cap nhat thanh cong", Toast.LENGTH_SHORT).show();
+        }
     }
 }
