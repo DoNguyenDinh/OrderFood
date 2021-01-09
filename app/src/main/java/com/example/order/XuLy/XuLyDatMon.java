@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.order.Data.DBManager;
 import com.example.order.Order;
 import com.example.order.OrderDetail;
+import com.example.order.ShowOrder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,6 @@ public class XuLyDatMon {
     }
 
 
-
-
-
     public Cursor getIDOrder() {
 
 
@@ -35,26 +33,8 @@ public class XuLyDatMon {
         return cs;
     }
 
-
-//    public void addOrder(Order order) {
-//        //mo ket noi database
-//        //dbManager.openCon();
-//
-//        //luu gia tri xuong database
-//        ContentValues values = new ContentValues();
-//        values.put(dbManager.ID_TABLE_ORDER, order.getIdTable());
-//
-//        db.insert(dbManager.TB_ORDER, null, values);
-//
-//        //dong ket noi
-//        db.close();
-//    }
-
     //insert data table chitietdatmon
     public long insertDataDetail(OrderDetail detail) {
-//        String sql_insertData = "insert into " + dbManager.TB_ORDER_DETAIL + "(" + dbManager.ID_ORDER_ORDER + "," + dbManager.ID_FOOD_ORDER + "," + dbManager.QUANTITY + ")"+
-//                "values ("+idOrder+","+idFood+","+quantityFood+")";
-
 
         ContentValues values = new ContentValues();
         values.put(dbManager.ID_ORDER_ORDER, detail.getIdOrder());
@@ -62,7 +42,7 @@ public class XuLyDatMon {
         values.put(dbManager.QUANTITY, detail.getQuantityFood());
         long result = db.insert(dbManager.TB_ORDER_DETAIL, null, values);
 
-        db.close();
+        //db.close();
 
         return result;
     }
@@ -98,5 +78,72 @@ public class XuLyDatMon {
         }
 
         return list;
+    }
+
+
+    //lay thong tin dat mon de thanh toan
+    public List<ShowOrder> getInfo(int iddatmon) {
+
+        String query_selectall = "select *" +
+                "FROM thucdon " +
+                "INNER JOIN chitietdatmon on chitietdatmon.madatmonan=" + iddatmon + " and chitietdatmon.mamonan=thucdon.mamonan";
+
+        List<ShowOrder> listInfo = new ArrayList<>();
+
+
+        Cursor cursor = db.rawQuery(query_selectall, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ShowOrder staff = new ShowOrder();
+
+                staff.setTenmonan(cursor.getString(1));
+                staff.setSoluong(cursor.getInt(7));
+
+                int dongia = cursor.getShort(2);
+                int soluong = cursor.getInt(7);
+                int thanhtien = dongia * soluong;
+
+                staff.setThanhtien(thanhtien);
+                listInfo.add(staff);
+            } while (cursor.moveToNext());
+        }
+       // db.close();
+        return listInfo;
+    }
+
+    //xoa mon an da dat
+    public void deleteFoodOrder(int madatmon, int mamonan) {
+
+        db.delete(dbManager.TB_ORDER_DETAIL, " madatmonan =? and mamonan=?", new String[]{madatmon + "", mamonan + ""});
+
+    }
+
+
+
+    //lay danh sach mon an theo ma dat mon
+    public List<ShowOrder> getDetailOrder(int iddatmon) {
+
+        String query_selectall = "select *" +
+                "FROM thucdon " +
+                "INNER JOIN chitietdatmon on chitietdatmon.madatmonan=" + iddatmon + " and chitietdatmon.mamonan=thucdon.mamonan";
+
+        List<ShowOrder> listInfo = new ArrayList<>();
+
+
+        Cursor cursor = db.rawQuery(query_selectall, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                int sl = cursor.getInt(7);
+                String name = cursor.getString(1);
+                ShowOrder staff = new ShowOrder(sl, name, 0);
+
+                listInfo.add(staff);
+            } while (cursor.moveToNext());
+        }
+        //db.close();
+        return listInfo;
     }
 }

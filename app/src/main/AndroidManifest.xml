@@ -3,13 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.order">
 
+
+    <!--xin cap quyen-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <uses-feature android:name="android.hardware.type.watch"
+    <uses-feature
+        android:name="android.hardware.type.watch"
         android:required="false"
         tools:ignore="InvalidWearFeatureAttribute" />
 
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -19,16 +22,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-<!--        <uses-library-->
-<!--            android:name="com.google.android.wearable"-->
-<!--            android:required="true" />-->
+        <!--        <uses-library-->
+        <!--            android:name="com.google.android.wearable"-->
+        <!--            android:required="true" />-->
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
         -->
-<!--        <meta-data-->
-<!--            android:name="com.google.android.wearable.standalone"-->
-<!--            android:value="true" />-->
+        <!--        <meta-data-->
+        <!--            android:name="com.google.android.wearable.standalone"-->
+        <!--            android:value="true" />-->
 
         <!-- declare activity in app -->
         <activity android:name=".Activity.MainActivity" />
@@ -37,7 +40,7 @@
         <activity android:name=".Activity.NewFoodActivity" />
         <activity android:name=".Activity.Order_Activity" />
         <activity android:name=".Activity.InputValues" />
-        <activity android:name=".Activity.PayActivity"/>
+        <activity android:name=".Activity.PayActivity" />
         <activity android:name=".Activity.DetailOrderActivity"></activity>
         <activity android:name=".Activity.UpdateQuantityActivity"></activity>
         <activity android:name=".Activity.AddFoodOrder"></activity>

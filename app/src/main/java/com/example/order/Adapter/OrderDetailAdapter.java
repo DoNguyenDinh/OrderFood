@@ -18,6 +18,7 @@ import com.example.order.Activity.UpdateQuantityActivity;
 import com.example.order.Data.DBManager;
 import com.example.order.R;
 import com.example.order.ShowOrder;
+import com.example.order.XuLy.XuLyDatMon;
 import com.example.order.XuLy.XuLyMonAn;
 
 import java.util.List;
@@ -74,14 +75,14 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
                 @Override
                 public void onClick(View v) {
                     XuLyMonAn xlMonAN=new XuLyMonAn(context);
+                    XuLyDatMon xlDatmon=new XuLyDatMon(context);
 
-                    DBManager db=new DBManager(context);
                     Cursor cs=xlMonAN.getIDFood(txt_tenmonan.getText().toString());
                     cs.moveToFirst();
                     int idfood=Integer.parseInt(cs.getString(0));
                     int iddatmon = DetailOrderActivity.madatmon;
 
-                    db.deleteFoodOrder(iddatmon,idfood);
+                    xlDatmon.deleteFoodOrder(iddatmon,idfood);
                     Intent i = new Intent(context, MainActivity.class);
                     i.setFlags(FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(i);;

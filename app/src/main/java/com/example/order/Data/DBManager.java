@@ -5,15 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
 
 import androidx.annotation.Nullable;
 
-import com.example.order.Menu;
 import com.example.order.Order;
-import com.example.order.OrderDetail;
-import com.example.order.ShowOrder;
 import com.example.order.Staff;
-import com.example.order.Table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +19,7 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     static final String DATABASE_NAME = "Restaurant";
-    static final int VERSION = 8;
+    static final int VERSION = 9;
 
     //loai mon an
     public String TB_FOOD_TYPE = "loaimonan";
@@ -73,10 +70,12 @@ public class DBManager extends SQLiteOpenHelper {
     static String ID_FOOD = "mamonan";
     public String NAME_FOOD = "tenmonan";
     public String STYLE_FOOD = "loaimonan";
+    public String IMAGE_FOOD = "hinhanh";
     private String createMenuFood = "CREATE TABLE " + TB_MENU + " (" +
             ID_FOOD + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             NAME_FOOD + " TEXT," +
             PRICE_FOOD + " Text," +
+            IMAGE_FOOD + " BLOB," +
             STYLE_FOOD + " INTEGER," +
             " FOREIGN KEY (" + STYLE_FOOD + ") REFERENCES " + STYLE_FOOD + "(" + ID_FOOD_TYPE + "))";
 
@@ -289,69 +288,21 @@ public class DBManager extends SQLiteOpenHelper {
         return getCursor;
     }
 
-    //lay thong tin dat mon de thanh toan
-    public List<ShowOrder> getInfo(int iddatmon) {
 
-        String query_selectall = "select *" +
-                "FROM thucdon " +
-                "INNER JOIN chitietdatmon on chitietdatmon.madatmonan=" + iddatmon + " and chitietdatmon.mamonan=thucdon.mamonan";
 
-        List<ShowOrder> listInfo = new ArrayList<>();
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query_selectall, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                ShowOrder staff = new ShowOrder();
 
-                staff.setTenmonan(cursor.getString(1));
-                staff.setSoluong(cursor.getInt(6));
 
-                int dongia = cursor.getShort(2);
-                int soluong = cursor.getInt(6);
-                int thanhtien = dongia * soluong;
 
-                staff.setThanhtien(thanhtien);
-                listInfo.add(staff);
-            } while (cursor.moveToNext());
-        }
-        db.close();
-        return listInfo;
-    }
+    //store image
 
-    //lay danh sach mon an theo ma dat mon
-    public List<ShowOrder> getDetailOrder(int iddatmon) {
-
-        String query_selectall = "select *" +
-                "FROM thucdon " +
-                "INNER JOIN chitietdatmon on chitietdatmon.madatmonan=" + iddatmon + " and chitietdatmon.mamonan=thucdon.mamonan";
-
-        List<ShowOrder> listInfo = new ArrayList<>();
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query_selectall, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-
-                int sl=cursor.getInt(6);
-                String name=cursor.getString(1);
-                ShowOrder staff = new ShowOrder(sl,name,0);
-
-                listInfo.add(staff);
-            } while (cursor.moveToNext());
-        }
-        db.close();
-        return listInfo;
-    }
-
-    //xoa mon an da dat
-    public void deleteFoodOrder(int madatmon, int mamonan) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        db.delete(TB_ORDER_DETAIL, " madatmonan =? and mamonan=?", new String[]{madatmon + "", mamonan + ""});
-
-    }
+//    public void storeImage(Image img) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        Bitmap bt = img.getBmImage();
+//
+//
+//    }
 
 }

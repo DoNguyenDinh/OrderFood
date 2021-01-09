@@ -35,26 +35,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
+        android:layout_marginTop="40dp"
         android:onClick="save_Food"
         android:text="Save"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="@+id/textView13"
-        app:layout_constraintHorizontal_bias="0.153"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_imageFood"
         tools:ignore="OnClick" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
         android:layout_marginEnd="72dp"
         android:onClick="cancel_food"
         android:text="cancel"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_saveFood"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.653"
-        app:layout_constraintStart_toEndOf="@+id/btn_saveFood"
-        app:layout_constraintTop_toBottomOf="@+id/spn_FoodStyle" />
+        app:layout_constraintHorizontal_bias="0.801"
+        app:layout_constraintStart_toEndOf="@+id/btn_saveFood" />
 
     <TextView
         android:id="@+id/textView12"
@@ -95,10 +93,31 @@
         android:layout_width="51dp"
         android:layout_height="52dp"
         android:layout_marginStart="20dp"
-        android:onClick="btn_addNewFoodStyle"
         android:drawableLeft="@android:drawable/ic_input_add"
         android:gravity="center"
+        android:onClick="btn_addNewFoodStyle"
         app:layout_constraintBaseline_toBaselineOf="@+id/spn_FoodStyle"
         app:layout_constraintStart_toEndOf="@+id/spn_FoodStyle" />
+
+    <Button
+        android:id="@+id/btn_chooseImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        android:text="chon hinh"
+        android:onClick="chooseImage"
+        app:layout_constraintStart_toEndOf="@+id/img_imageFood"
+        app:layout_constraintTop_toBottomOf="@+id/btn_addFoodStyle" />
+
+    <ImageView
+        android:id="@+id/img_imageFood"
+        android:layout_width="177dp"
+        android:layout_height="182dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spn_FoodStyle"
+        app:srcCompat="@drawable/no_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,10 +3,13 @@ package com.example.order.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +54,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         holder.mTextPrice.setText(mMenu.getPrice() + " $");
         holder.mID.setText(mMenu.getId() + "");
 
+        byte[] foodimage = mMenu.getImg();
+        Bitmap bm = BitmapFactory.decodeByteArray(foodimage,0,foodimage.length);
+
+        holder.img.setImageBitmap(bm);
+
     }
 
     @Override
@@ -64,12 +72,17 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         private TextView mTextPrice;
         private TextView mID;
         private Button btn_insertFood;
+        private ImageView img;
+
 
         public MenuViewHolder(@NonNull View itemView) {
             super(itemView);
             mTextName = (TextView) itemView.findViewById(R.id.txt_name_food);
             mTextPrice = (TextView) itemView.findViewById(R.id.txt_food_price);
             mID = (TextView) itemView.findViewById(R.id.txt_idFood_item);
+            img = (ImageView) itemView.findViewById(R.id.img_imageFood_menu);
+
+
             btn_insertFood = (Button) itemView.findViewById(R.id.btn_insertFood);
             btn_insertFood.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,14 +99,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                     idOrder = cs.getString(0);
                     int idorder = Integer.parseInt(idOrder);
 
-
                     Intent i = new Intent(context, InputValues.class);
                     i.putExtra("tenmonan", mTextName.getText().toString());
                     i.putExtra("mamonan", mID.getText() + "");
                     i.putExtra("madatmonan", idorder);
-
-
-                   // Toast.makeText(context, "ma dat mon: " + idorder, Toast.LENGTH_SHORT).show();
 
                     context.startActivity(i);
 

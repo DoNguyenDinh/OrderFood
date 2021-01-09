@@ -33,6 +33,7 @@ public class XuLyMonAn {
         values.put(dbManager.NAME_FOOD, table.getNameFood());
         values.put(dbManager.PRICE_FOOD, table.getPrice());
         values.put(dbManager.STYLE_FOOD, table.getStyleFood());
+        values.put(dbManager.IMAGE_FOOD, table.getImg());
         long result = db.insert(dbManager.TB_MENU, null, values);
 
         //dong ket noi
@@ -84,7 +85,7 @@ public class XuLyMonAn {
                 menu.setId(cursor.getInt(0));
                 menu.setNameFood(cursor.getString(1));
                 menu.setPrice(cursor.getString(2));
-
+                menu.setImg(cursor.getBlob(3));
                 listMenu.add(menu);
             } while (cursor.moveToNext());
         }
@@ -98,12 +99,11 @@ public class XuLyMonAn {
 
 
         String sql = "update " + dbManager.TB_ORDER_DETAIL + " set soluong = " + soluong + " where " + dbManager.ID_ORDER_ORDER + " = '" +
-                madatmon + "' and " + dbManager.ID_FOOD_ORDER + " = '" + mamonan+"'";
+                madatmon + "' and " + dbManager.ID_FOOD_ORDER + " = '" + mamonan + "'";
         Cursor cs = db.rawQuery(sql, null);
         db.execSQL(sql);
         return cs;
     }
-
 
 
     //them loai mon an moi
@@ -119,7 +119,6 @@ public class XuLyMonAn {
 
         return result;
     }
-
 
 
     //lay danh sach loai mon an

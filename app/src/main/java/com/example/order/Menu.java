@@ -6,9 +6,6 @@ public class Menu {
     private String price;
     private int styleFood;
 
-    public Menu() {
-    }
-
     public int getId() {
         return id;
     }
@@ -41,9 +38,25 @@ public class Menu {
         this.styleFood = styleFood;
     }
 
-    public Menu(String nameFood, String price, int styleFood) {
+    public byte[] getImg() {
+        return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
+    }
+
+    private byte[] img;
+
+    public Menu(String nameFood, String price, int styleFood, byte[] img) {
         this.nameFood = nameFood;
         this.price = price;
         this.styleFood = styleFood;
+        this.img = img;
     }
+
+    public Menu() {
+    }
+
+
 }

@@ -17,6 +17,7 @@ import com.example.order.Data.DBManager;
 import com.example.order.R;
 import com.example.order.ShowOrder;
 import com.example.order.XuLy.XuLyBanAn;
+import com.example.order.XuLy.XuLyDatMon;
 
 import java.util.List;
 
@@ -35,13 +36,13 @@ public class PayActivity extends AppCompatActivity {
         anhxa();
         txttongtien = (TextView) findViewById(R.id.txt_tongsotien);
 
-        DBManager d = new DBManager(getApplicationContext());
+        XuLyDatMon xlDatMon=new XuLyDatMon(getApplicationContext());
 
 
         int iddatmon = Integer.parseInt(txt);
 
 
-        listPay = d.getInfo(iddatmon);
+        listPay = xlDatMon.getInfo(iddatmon);
 
         int giatien = 0;
         for (int i = 0; i < listPay.size(); i++) {

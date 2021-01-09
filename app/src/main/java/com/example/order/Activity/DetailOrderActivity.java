@@ -10,11 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.order.Adapter.OrderAdapter;
+
 import com.example.order.Adapter.OrderDetailAdapter;
-import com.example.order.Data.DBManager;
+
 import com.example.order.R;
 import com.example.order.ShowOrder;
+import com.example.order.XuLy.XuLyDatMon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,18 +59,17 @@ public class DetailOrderActivity extends AppCompatActivity {
     private void initData() {
         getData();
         orderList = new ArrayList<>();
-        DBManager dbManager = new DBManager(getApplicationContext());
-        orderList = dbManager.getDetailOrder(madatmon);
-}
+        XuLyDatMon xlDatMon = new XuLyDatMon(getApplicationContext());
+        orderList = xlDatMon.getDetailOrder(madatmon);
+    }
 
     public void themmonanvaods(View view) {
-
 
         Intent i = new Intent(getApplicationContext(), AddFoodOrder.class);
         i.putExtra("madatmon", madatmon);
         startActivity(i);
 
-        Toast.makeText(getApplicationContext(), "ma dat mon: "+madatmon, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "ma dat mon: " + madatmon, Toast.LENGTH_SHORT).show();
 
     }
 
