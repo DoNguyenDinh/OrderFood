@@ -22,8 +22,8 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText edtUserName, edtPassWord;
     Button btnLogin, btnSignup;
-    List<String> staffList;
-    public static int ma_nhan_vien=0;
+    List<Staff> staffList;
+    public static int ma_nhan_vien = 0;
     public static String ten_nv;
 
 
@@ -39,18 +39,18 @@ public class LoginActivity extends AppCompatActivity {
 
 
     //lay thong tin dang nhap cua nhan vien
-    public List getListStaff(String name, String pass) {
+    public List<Staff> getListStaff(String name, String pass) {
 
         staffList = new ArrayList<>();
         DBManager db = new DBManager(getApplicationContext());
 
+        staffList = db.getAccount(name, pass);
+//        Cursor cs = db.GetId(name, pass);
+//        cs.moveToFirst();
 
-        Cursor cs = db.GetId(name, pass);
-        cs.moveToFirst();
-
-        ten_nv = cs.getString(1);
-        ma_nhan_vien=cs.getInt(0);
-        staffList.add(ma_nhan_vien+"");
+//        ten_nv = cs.getString(1);
+//        ma_nhan_vien=cs.getInt(0);
+//        staffList.add(ma_nhan_vien+"");
 
         return staffList;
     }
@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         if (name.matches("") || pass.matches("")) {
             Toast.makeText(getApplicationContext(), "chua nhap", Toast.LENGTH_SHORT).show();
         } else {
+
             if (getListStaff(name, pass).size() == 0) {
                 Toast.makeText(getApplicationContext(), "tai khoan khong ton tai", Toast.LENGTH_SHORT).show();
             } else {
@@ -74,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 cs.moveToFirst();
 
                 ten_nv = cs.getString(1);
-                ma_nhan_vien=cs.getInt(0);
+                ma_nhan_vien = cs.getInt(0);
                 Toast.makeText(getApplicationContext(), "Chao mung ban : " + ten_nv, Toast.LENGTH_SHORT).show();
 
                 startActivity(i);

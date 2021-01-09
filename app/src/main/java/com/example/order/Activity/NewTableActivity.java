@@ -71,7 +71,7 @@ public class NewTableActivity extends AppCompatActivity {
     List<String> listTable;
 
     //kiem tra ten ban da ton tai chua
-    boolean checkTableName(String userName) {
+    public boolean checkTableName(String userName) {
 
         listTable = new ArrayList<>();
         DBManager db = new DBManager(getApplicationContext());

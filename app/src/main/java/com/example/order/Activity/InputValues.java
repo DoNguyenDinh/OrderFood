@@ -34,9 +34,6 @@ public class InputValues extends AppCompatActivity {
         getData();
         Toast.makeText(getApplicationContext(), "ten mon an: " + nameFood, Toast.LENGTH_SHORT).show();
 
-        Log.d("show result", "ten mon an: " + nameFood);
-
-
         anhxa();
 
     }

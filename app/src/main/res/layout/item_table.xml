@@ -33,10 +33,17 @@
             android:id="@+id/txt_tableName"
             android:layout_width="260dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:background="@color/custom"
             android:text="Ban"
             android:textSize="34sp" />
+
+        <Button
+            android:id="@+id/btn_edit_table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+" />
 
 
     </LinearLayout>

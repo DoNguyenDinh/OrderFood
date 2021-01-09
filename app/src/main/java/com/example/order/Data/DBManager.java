@@ -22,7 +22,7 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     static final String DATABASE_NAME = "Restaurant";
-    static final int VERSION = 7;
+    static final int VERSION = 8;
 
     //loai mon an
     public String TB_FOOD_TYPE = "loaimonan";
@@ -72,10 +72,13 @@ public class DBManager extends SQLiteOpenHelper {
     public String PRICE_FOOD = "gia";
     static String ID_FOOD = "mamonan";
     public String NAME_FOOD = "tenmonan";
+    public String STYLE_FOOD = "loaimonan";
     private String createMenuFood = "CREATE TABLE " + TB_MENU + " (" +
             ID_FOOD + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             NAME_FOOD + " TEXT," +
-            PRICE_FOOD + " Text)";
+            PRICE_FOOD + " Text," +
+            STYLE_FOOD + " INTEGER," +
+            " FOREIGN KEY (" + STYLE_FOOD + ") REFERENCES "+STYLE_FOOD + "(" + ID_FOOD_TYPE + "))";
 
     //table nhanvien
     public String TB_STAFF = "nhanvien";
@@ -121,6 +124,7 @@ public class DBManager extends SQLiteOpenHelper {
     String DROP_STAFF = "DROP TABLE IF EXISTS " + TB_STAFF;
     String DROP_MENU = "DROP TABLE IF EXISTS " + TB_MENU;
     String DROP_TABLE = "DROP TABLE IF EXISTS " + TB_TABLEFOOD;
+    String DROP_STYLE_FOOD = "DROP TABLE IF EXISTS " + TB_FOOD_TYPE;
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -130,6 +134,7 @@ public class DBManager extends SQLiteOpenHelper {
         db.execSQL(DROP_STAFF);
         db.execSQL(DROP_MENU);
         db.execSQL(DROP_TABLE);
+        db.execSQL(DROP_STYLE_FOOD);
 
 
         //create new table
@@ -160,23 +165,6 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-    //lay danh sach loai mon an
-
-    List<String> listFoodStyle() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String select = "Select * from " + TB_FOOD_TYPE;
-        List<String> list = new ArrayList<>();
-
-        Cursor cs=db.rawQuery(select,null);
-        if (cs.moveToFirst()){
-            do {
-
-                list.add(cs.getString(1));
-            } while (cs.moveToNext());
-        }
-
-        return list;
-    }
 
     //lay danh sach da dat mon
     public List<Order> selectListOrdered() {
@@ -211,29 +199,7 @@ public class DBManager extends SQLiteOpenHelper {
 
     }
 
-    //lay danh sach mon an
-    public List<Menu> selectListMenu() {
 
-        String query_selectall = "Select * from " + TB_MENU;
-        List<Menu> listMenu = new ArrayList<>();
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query_selectall, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Menu menu = new Menu();
-
-                menu.setId(cursor.getInt(0));
-                menu.setNameFood(cursor.getString(1));
-                menu.setPrice(cursor.getString(2));
-
-                listMenu.add(menu);
-            } while (cursor.moveToNext());
-        }
-        db.close();
-        return listMenu;
-    }
 
     //tao nguoi dung moi
     public long addNewUser(Staff staff) {

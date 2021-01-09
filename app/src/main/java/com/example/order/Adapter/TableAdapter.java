@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.order.Activity.EditTableActivity;
 import com.example.order.Activity.Order_Activity;
 import com.example.order.Data.DBManager;
 import com.example.order.Order;
@@ -66,16 +68,17 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MenuViewHold
         private TextView mNameTable;
         private TextView id;
         Context ct;
+        Button btnedit;
 
         int idTable;
 
 
         public MenuViewHolder(@NonNull View itemView) {
             super(itemView);
-            mNameTable = (TextView) itemView.findViewById(R.id.txt_tableName);
+
             id = (TextView) itemView.findViewById(R.id.txt_id_table);
 
-
+            mNameTable = (TextView) itemView.findViewById(R.id.txt_tableName);
             mNameTable.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -103,6 +106,20 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MenuViewHold
                         Toast.makeText(context, "Ban nay da duoc dat " + maban, Toast.LENGTH_SHORT).show();
                     }
 
+                }
+            });
+
+
+            btnedit = (Button) itemView.findViewById(R.id.btn_edit_table);
+            btnedit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, EditTableActivity.class);
+                    String name = mNameTable.getText() + "";
+
+                    i.putExtra("tenbanan", name);
+
+                    context.startActivity(i);
                 }
             });
         }

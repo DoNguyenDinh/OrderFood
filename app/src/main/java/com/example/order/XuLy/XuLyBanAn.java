@@ -16,9 +16,9 @@ public class XuLyBanAn {
     SQLiteDatabase db;
     DBManager dbManager;
 
-    public XuLyBanAn(Context context){
-        dbManager=new DBManager(context);
-        db=dbManager.openCon();
+    public XuLyBanAn(Context context) {
+        dbManager = new DBManager(context);
+        db = dbManager.openCon();
     }
 
 
@@ -31,10 +31,9 @@ public class XuLyBanAn {
         long result = db.insert(dbManager.TB_TABLEFOOD, null, values);
 
         //dong ket noi
-        db.close();
+       // db.close();
         return result;
     }
-
 
 
     //lay trang thai ban an
@@ -66,7 +65,7 @@ public class XuLyBanAn {
                 listTable.add(table);
             } while (cursor.moveToNext());
         }
-        db.close();
+  // db.close();
         return listTable;
     }
 
@@ -74,8 +73,8 @@ public class XuLyBanAn {
     //lay danh sach ten ban an
     public List<String> selectlistNameTable(String tableName) {
 
-        String query_selectall = "Select * from " + dbManager.TB_TABLEFOOD+" where tenbanan='"+tableName+"'";
-        List<String> listUserName=new ArrayList<>();
+        String query_selectall = "Select * from " + dbManager.TB_TABLEFOOD + " where tenbanan='" + tableName + "'";
+        List<String> listUserName = new ArrayList<>();
 
 
         Cursor cursor = db.rawQuery(query_selectall, null);
@@ -85,7 +84,7 @@ public class XuLyBanAn {
                 listUserName.add(cursor.getString(1));
             } while (cursor.moveToNext());
         }
-        db.close();
+     // db.close();
         return listUserName;
     }
 
@@ -105,5 +104,29 @@ public class XuLyBanAn {
 
     }
 
+    //xoa ban an
+    public void deleteTabele(String nameTable) {
+        db.delete(dbManager.TB_TABLEFOOD, " tenbanan =?", new String[]{nameTable});
+
+    }
+
+    //lay id ban an
+    //lay trang thai ban an
+    public Cursor getIDTable(String nameTable) {
+
+        String sql = "Select " + dbManager.ID_TABLE + " from " + dbManager.TB_TABLEFOOD + " where tenbanan = '" + nameTable + "'";
+        Cursor cs = db.rawQuery(sql, null);
+
+        return cs;
+    }
+
+    public void updateTableName(String nameTable, int id) {
+
+
+        String update_db = "update " + dbManager.TB_TABLEFOOD + " set " + dbManager.NAME_TABLE + "= '" + nameTable + "' where " + dbManager.ID_TABLE + " = " + id;
+        db.execSQL(update_db);
+//        db.close();
+
+    }
 
 }

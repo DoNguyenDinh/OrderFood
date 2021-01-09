@@ -95,6 +95,7 @@
         android:layout_width="51dp"
         android:layout_height="52dp"
         android:layout_marginStart="20dp"
+        android:onClick="btn_addNewFoodStyle"
         android:drawableLeft="@android:drawable/ic_input_add"
         android:gravity="center"
         app:layout_constraintBaseline_toBaselineOf="@+id/spn_FoodStyle"

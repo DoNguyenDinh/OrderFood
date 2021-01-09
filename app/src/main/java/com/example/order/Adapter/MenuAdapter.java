@@ -75,6 +75,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                 @Override
                 public void onClick(View v) {
 
+
                     DBManager db = new DBManager(context);
 
                     Cursor cs = db.getIDOrder();

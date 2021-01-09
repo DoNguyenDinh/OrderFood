@@ -16,6 +16,7 @@ import com.example.order.Adapter.MenuAdapter;
 import com.example.order.Data.DBManager;
 import com.example.order.Menu;
 import com.example.order.R;
+import com.example.order.XuLy.XuLyMonAn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,10 +53,10 @@ public class MenuFragment extends Fragment {
 
     private void initData() {
         menuList = new ArrayList<>();
-        DBManager dbManager = new DBManager(getContext());
+        XuLyMonAn xl = new XuLyMonAn(getContext());
 
         //lay danh sach ban tu database
-        menuList = dbManager.selectListMenu();
+        menuList = xl.selectListMenu();
 
 
     }

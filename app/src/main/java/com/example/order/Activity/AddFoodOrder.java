@@ -14,6 +14,7 @@ import com.example.order.Data.DBManager;
 import com.example.order.Menu;
 import com.example.order.R;
 import com.example.order.ShowOrder;
+import com.example.order.XuLy.XuLyMonAn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +41,9 @@ public class AddFoodOrder extends AppCompatActivity {
 
     private void initData() {
         listFood=new ArrayList<>();
-        DBManager dbManager = new DBManager(getApplicationContext());
+     XuLyMonAn xl=new XuLyMonAn(getApplicationContext());
 
-        listFood = dbManager.selectListMenu();
+        listFood = xl.selectListMenu();
 
         getData();
     }

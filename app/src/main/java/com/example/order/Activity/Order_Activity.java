@@ -18,6 +18,7 @@ import com.example.order.Menu;
 import com.example.order.Order;
 import com.example.order.R;
 import com.example.order.XuLy.XuLyDatMon;
+import com.example.order.XuLy.XuLyMonAn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class Order_Activity extends AppCompatActivity {
     private TextView tableChoose;
     public static String txt;
     List<Menu> menuList;
+    XuLyMonAn xl;
 
 
     @Override
@@ -39,8 +41,8 @@ public class Order_Activity extends AppCompatActivity {
 
         tableChoose = (TextView) findViewById(R.id.txt_);
 
-        DBManager db = new DBManager(getApplicationContext());
-        menuList = db.selectListMenu();
+        xl = new XuLyMonAn(getApplicationContext());
+        menuList = xl.selectListMenu();
 
         MenuAdapter menuAdapter = new MenuAdapter(this, menuList);
         rv_menu.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -72,7 +74,7 @@ public class Order_Activity extends AppCompatActivity {
         DBManager dbManager = new DBManager(this);
 
         //lay danh sach mon an tu database
-        menuList = dbManager.selectListMenu();
+        menuList = xl.selectListMenu();
 
     }
 
@@ -86,9 +88,8 @@ public class Order_Activity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         maban = bundle.getInt("mabanan");
-        Toast.makeText(this, "ma ban"+maban, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "ma ban" + maban, Toast.LENGTH_SHORT).show();
 
-//        txt = TableAdapter.maban;
         tableChoose.setText("Please choose food and drink " + "( " + maban + ")");
     }
 
@@ -103,14 +104,12 @@ public class Order_Activity extends AppCompatActivity {
     //them moi dat mon
     public void newOrder(View view) {
 
-        //Order or=createOrder();
         Order or = new Order(maban);
         DBManager db = new DBManager(getApplicationContext());
-        long a=db.addOrder(or);
-        if(a>0){
+        long a = db.addOrder(or);
+        if (a > 0) {
             Toast.makeText(this, "them thanh cong", Toast.LENGTH_SHORT).show();
-        }
-        else{
+        } else {
             Toast.makeText(this, "Them that bai", Toast.LENGTH_SHORT).show();
 
         }
