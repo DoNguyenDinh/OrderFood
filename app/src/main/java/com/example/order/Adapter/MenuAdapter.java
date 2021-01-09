@@ -78,18 +78,24 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
                     DBManager db = new DBManager(context);
 
+
+                    //lay ma dat mon moi nhat
                     Cursor cs = db.getIDOrder();
                     cs.moveToFirst();
                     String idOrder;
-                    idOrder =  cs.getString(0);
+                    idOrder = cs.getString(0);
                     int idorder = Integer.parseInt(idOrder);
 
 
-                        Intent i = new Intent(context, InputValues.class);
-                        i.putExtra("tenmonan", mTextName.getText().toString());
-                        i.putExtra("mamonan", mID.getText() + "");
-                        i.putExtra("madatmonan",idorder);
-                        context.startActivity(i);
+                    Intent i = new Intent(context, InputValues.class);
+                    i.putExtra("tenmonan", mTextName.getText().toString());
+                    i.putExtra("mamonan", mID.getText() + "");
+                    i.putExtra("madatmonan", idorder);
+
+
+                   // Toast.makeText(context, "ma dat mon: " + idorder, Toast.LENGTH_SHORT).show();
+
+                    context.startActivity(i);
 
                 }
 

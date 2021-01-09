@@ -3,6 +3,7 @@ package com.example.order.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,7 +43,7 @@ public class DetailOrderActivity extends AppCompatActivity {
     int maban;
 
 
-    //lay du lieu duoc goi tu
+    //lay du lieu duoc goi tu orderAdapter
     void getData() {
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
@@ -59,17 +60,16 @@ public class DetailOrderActivity extends AppCompatActivity {
         orderList = new ArrayList<>();
         DBManager dbManager = new DBManager(getApplicationContext());
         orderList = dbManager.getDetailOrder(madatmon);
-    }
+}
 
     public void themmonanvaods(View view) {
 
 
         Intent i = new Intent(getApplicationContext(), AddFoodOrder.class);
-
         i.putExtra("madatmon", madatmon);
-
-
         startActivity(i);
+
+        Toast.makeText(getApplicationContext(), "ma dat mon: "+madatmon, Toast.LENGTH_SHORT).show();
 
     }
 

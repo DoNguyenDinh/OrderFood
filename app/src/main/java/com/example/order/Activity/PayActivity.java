@@ -26,7 +26,6 @@ public class PayActivity extends AppCompatActivity {
     List<ShowOrder> listPay;
     TextView txttongtien;
 
-    ShowOrder sor = new ShowOrder();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

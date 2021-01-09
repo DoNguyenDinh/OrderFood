@@ -19,6 +19,10 @@ import com.example.order.OrderDetail;
 import com.example.order.R;
 import com.example.order.XuLy.XuLyBanAn;
 import com.example.order.XuLy.XuLyDatMon;
+import com.example.order.XuLy.XuLyMonAn;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InputValues extends AppCompatActivity {
     private String nameFood, idFood;
@@ -32,8 +36,6 @@ public class InputValues extends AppCompatActivity {
         setContentView(R.layout.input_values);
 
         getData();
-        Toast.makeText(getApplicationContext(), "ten mon an: " + nameFood, Toast.LENGTH_SHORT).show();
-
         anhxa();
 
     }
@@ -55,27 +57,47 @@ public class InputValues extends AppCompatActivity {
         int quantity = Integer.parseInt(edtQuantity.getText().toString());
 
 
-        Toast.makeText(getApplicationContext(), "ma dat mon" + idOrder, Toast.LENGTH_SHORT).show();
-
-
         XuLyBanAn xlBanAn = new XuLyBanAn(getApplicationContext());
+        XuLyDatMon xlDatMon = new XuLyDatMon(getApplicationContext());
+        XuLyMonAn xlMonAn = new XuLyMonAn(getApplicationContext());
 
-
-        DBManager db = new DBManager(getApplicationContext());
         OrderDetail detail = insertData(idOrder, idfood, quantity);
 
-        long checkResult = db.insertDataDetail(detail);
-        if (checkResult > 0) {
-            int mabanan = Order_Activity.maban;
 
-            //gan gia tri ban da duoc dat
-            xlBanAn.updateTableStatus(mabanan, false);
+        Toast.makeText(getApplicationContext(), "ma dat mon" + detail.getIdOrder(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "ma mon an" + detail.getIdFood(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "so luong " + detail.getQuantityFood(), Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(getApplicationContext(), "them thanh cong", Toast.LENGTH_SHORT).show();
+
+//
+//        //kiem tra mon an da ton tai trong order chua
+//
+
+        List<String> n = new ArrayList<>();
+        n = xlDatMon.selectListFoodOrdered(idOrder, idfood);
+        Toast.makeText(getApplicationContext(), "check: " + n.size(), Toast.LENGTH_SHORT).show();
+
+        if (n.size() > 0) {
+            xlMonAn.updateQuantityFood(idOrder, quantity, idfood);
+            Toast.makeText(getApplicationContext(), "cap nhat so luong thanh cong", Toast.LENGTH_SHORT).show();
+
             startActivity(new Intent(this, MainActivity.class));
+
         } else {
-            Toast.makeText(getApplicationContext(), "them that bai", Toast.LENGTH_SHORT).show();
+            long checkResult = xlDatMon.insertDataDetail(detail);
+            if (checkResult > 0) {
+                int mabanan = Order_Activity.maban;
+
+                //gan gia tri ban da duoc dat
+                xlBanAn.updateTableStatus(mabanan, false);
+
+                Toast.makeText(getApplicationContext(), "them thanh cong", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, MainActivity.class));
+            } else {
+                Toast.makeText(getApplicationContext(), "them that bai", Toast.LENGTH_SHORT).show();
+            }
         }
+
     }
 
     int idOrder;

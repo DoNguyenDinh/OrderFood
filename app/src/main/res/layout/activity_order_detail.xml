@@ -42,7 +42,7 @@
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.145"
+        app:layout_constraintHorizontal_bias="0.832"
         app:layout_constraintStart_toEndOf="@+id/textView7" />
 
     <Button

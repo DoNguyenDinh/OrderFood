@@ -28,14 +28,14 @@ public class NewFoodStyleActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_new_foodstyle);
-        xlMonAn=new XuLyMonAn(this);
+        xlMonAn = new XuLyMonAn(this);
         anhxa();
     }
 
     private void anhxa() {
-        edt_nameStyleFood=(EditText)findViewById(R.id.edt_nameStyleFood);
-        btnAddNewStyle=(Button)findViewById(R.id.btn_newFoodStyle);
-        btnCanel=(Button)findViewById(R.id.btn_cancel_stylefood);
+        edt_nameStyleFood = (EditText) findViewById(R.id.edt_nameStyleFood);
+        btnAddNewStyle = (Button) findViewById(R.id.btn_newFoodStyle);
+        btnCanel = (Button) findViewById(R.id.btn_cancel_stylefood);
 
     }
 
@@ -51,40 +51,45 @@ public class NewFoodStyleActivity extends AppCompatActivity {
     }
 
 
+    boolean checkNameStyle(String name) {
 
-    boolean checkNameStyle(String name){
+
+        List<String> list = new ArrayList<>();
+
+        //lay danh sach loai mon an
 
 
-       List<String> list=new ArrayList<>();
-        list=xlMonAn.selectListFoodStyle();
-        for(int i=0;i<list.size();i++){
-            name=list.get(i);
-            return true;
+        list = xlMonAn.selectListFoodStyle();
+        for (int i = 0; i < list.size(); i++) {
+            if (name == list.get(i)) {
+                return true;
+            }
         }
         return false;
 
     }
+
     public void newfoodstyle(View view) {
 
-        String name=edt_nameStyleFood.getText()+"";
+        String name = edt_nameStyleFood.getText() + "";
 
-        if(name.matches("")||name==null){
+        if (name.matches("") || name == null) {
             Toast.makeText(this, "chua nhap ten loai mon an", Toast.LENGTH_SHORT).show();
 
-        }else {
+        } else {
 
-            if(checkNameStyle(name)){
+            if (checkNameStyle(name)) {
                 Toast.makeText(this, "loai mon an nay da ton tai", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 FoodStyle food = createNew(name);
 
-                long result=xlMonAn.addFoodStyle(food);
+                long result = xlMonAn.addFoodStyle(food);
                 Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
 
-                if(result>0){
+                if (result > 0) {
                     Toast.makeText(this, "Them thanh cong", Toast.LENGTH_SHORT).show();
 
-                }else {
+                } else {
                     Toast.makeText(this, "Them that bai", Toast.LENGTH_SHORT).show();
 
                 }

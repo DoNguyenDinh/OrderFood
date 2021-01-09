@@ -26,8 +26,8 @@
             android:id="@+id/txt_quantityFood_OrderDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/btn_edit_OrderDetail"

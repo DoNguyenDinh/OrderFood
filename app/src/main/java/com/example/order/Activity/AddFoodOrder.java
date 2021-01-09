@@ -32,7 +32,7 @@ public class AddFoodOrder extends AppCompatActivity {
         initData();
 
 
-        rv=(RecyclerView)findViewById(R.id.rv_addFoodOrder);
+        rv = (RecyclerView) findViewById(R.id.rv_addFoodOrder);
         AddFoodOrderAdapter menuAdapter = new AddFoodOrderAdapter(this, listFood);
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rv.setAdapter(menuAdapter);
@@ -40,16 +40,16 @@ public class AddFoodOrder extends AppCompatActivity {
     }
 
     private void initData() {
-        listFood=new ArrayList<>();
-     XuLyMonAn xl=new XuLyMonAn(getApplicationContext());
+        listFood = new ArrayList<>();
+        XuLyMonAn xl = new XuLyMonAn(getApplicationContext());
 
         listFood = xl.selectListMenu();
 
         getData();
     }
 
+    public static int madatmon;
 
-   public static int madatmon;
     //lay du lieu tu detailorder
     void getData() {
         Intent intent = getIntent();

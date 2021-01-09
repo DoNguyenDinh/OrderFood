@@ -30,7 +30,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public OrderAdapter(Context mtexfood, List<Order> mlistMenu) {
         this.orderList = mlistMenu;
         this.context = mtexfood;
-
     }
 
     @NonNull
@@ -47,7 +46,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         Order order = orderList.get(position);
         holder.txtIDTable.setText(order.getIdTable() + "");
         holder.txtIDOrder.setText(order.getId() + "");
-
 
     }
 

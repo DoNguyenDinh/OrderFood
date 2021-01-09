@@ -36,7 +36,7 @@ public class XuLyMonAn {
         long result = db.insert(dbManager.TB_MENU, null, values);
 
         //dong ket noi
-        db.close();
+        //db.close();
 
         return result;
     }
@@ -88,7 +88,7 @@ public class XuLyMonAn {
                 listMenu.add(menu);
             } while (cursor.moveToNext());
         }
-        db.close();
+        //db.close();
         return listMenu;
     }
 
@@ -97,8 +97,8 @@ public class XuLyMonAn {
     public Cursor updateQuantityFood(int madatmon, int soluong, int mamonan) {
 
 
-        String sql = "update " + dbManager.TB_ORDER_DETAIL + " set soluong = " + soluong + " where " + dbManager.ID_ORDER_ORDER + " = " +
-                madatmon + " and " + dbManager.ID_FOOD_ORDER + " = " + mamonan;
+        String sql = "update " + dbManager.TB_ORDER_DETAIL + " set soluong = " + soluong + " where " + dbManager.ID_ORDER_ORDER + " = '" +
+                madatmon + "' and " + dbManager.ID_FOOD_ORDER + " = '" + mamonan+"'";
         Cursor cs = db.rawQuery(sql, null);
         db.execSQL(sql);
         return cs;
@@ -115,7 +115,7 @@ public class XuLyMonAn {
         long result = db.insert(dbManager.TB_FOOD_TYPE, null, values);
 
         //dong ket noi
-        db.close();
+        //db.close();
 
         return result;
     }

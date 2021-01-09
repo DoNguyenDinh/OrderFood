@@ -78,7 +78,7 @@ public class DBManager extends SQLiteOpenHelper {
             NAME_FOOD + " TEXT," +
             PRICE_FOOD + " Text," +
             STYLE_FOOD + " INTEGER," +
-            " FOREIGN KEY (" + STYLE_FOOD + ") REFERENCES "+STYLE_FOOD + "(" + ID_FOOD_TYPE + "))";
+            " FOREIGN KEY (" + STYLE_FOOD + ") REFERENCES " + STYLE_FOOD + "(" + ID_FOOD_TYPE + "))";
 
     //table nhanvien
     public String TB_STAFF = "nhanvien";
@@ -165,7 +165,6 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-
     //lay danh sach da dat mon
     public List<Order> selectListOrdered() {
         String query_selectall = "Select * from " + TB_ORDER + " where " + STATUS_ORDER + " = 1";
@@ -198,7 +197,6 @@ public class DBManager extends SQLiteOpenHelper {
         db.execSQL(update_db);
 
     }
-
 
 
     //tao nguoi dung moi
@@ -281,20 +279,6 @@ public class DBManager extends SQLiteOpenHelper {
         return cs;
     }
 
-    //them du lieu vao chitietdatmon
-    public long insertDataDetail(OrderDetail detail) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(ID_ORDER_ORDER, detail.getIdOrder());
-        values.put(ID_FOOD_ORDER, detail.getIdFood());
-        values.put(QUANTITY, detail.getQuantityFood());
-        long result = db.insert(TB_ORDER_DETAIL, null, values);
-
-        db.close();
-        return result;
-    }
-
 
     //get name login
     public Cursor getNameLogin(int id) {
@@ -319,15 +303,13 @@ public class DBManager extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-
-
                 ShowOrder staff = new ShowOrder();
 
                 staff.setTenmonan(cursor.getString(1));
-                staff.setSoluong(cursor.getInt(5));
+                staff.setSoluong(cursor.getInt(6));
 
                 int dongia = cursor.getShort(2);
-                int soluong = cursor.getInt(5);
+                int soluong = cursor.getInt(6);
                 int thanhtien = dongia * soluong;
 
                 staff.setThanhtien(thanhtien);
@@ -353,10 +335,10 @@ public class DBManager extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
 
-                ShowOrder staff = new ShowOrder();
+                int sl=cursor.getInt(6);
+                String name=cursor.getString(1);
+                ShowOrder staff = new ShowOrder(sl,name,0);
 
-                staff.setTenmonan(cursor.getString(1));
-                staff.setSoluong(cursor.getInt(5));
                 listInfo.add(staff);
             } while (cursor.moveToNext());
         }

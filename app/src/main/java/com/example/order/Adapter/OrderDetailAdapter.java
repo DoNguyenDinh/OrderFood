@@ -48,8 +48,8 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
     public void onBindViewHolder(@NonNull OrderDetailAdapter.OrderDetailViewholder holder, int position) {
 
         ShowOrder order = list.get(position);
-        holder.txt_tenmonan.setText(order.getTenmonan() + "");
-        holder.txt_soluong.setText(order.getSoluong() + "");
+        holder.txt_tenmonan.setText(order.getTenmonan());
+        holder.txt_soluong.setText(order.getSoluong()+"");
 
     }
 
