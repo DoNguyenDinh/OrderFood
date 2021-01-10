@@ -30,8 +30,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 2:
                 return new MenuFragment();
             case 3:
-                return new ReportFragment();
-            case 4:
                 return new StaffFragment();
             default:
                 return new OrderFragment();
@@ -40,7 +38,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 5;
+        return 4;
     }
 
     @Nullable
@@ -58,10 +56,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 title = "Menu";
                 break;
             case 3:
-                title = "Report";
-                break;
-            case 4:
-                title="Staff";
+                title = "Staff";
         }
         return title;
     }

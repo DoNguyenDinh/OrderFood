@@ -42,7 +42,11 @@ public class EditFood extends AppCompatActivity {
         edtNameFood.setText(name);
         edtPriceFood.setText(price);
         byte[] foodimage = img;
-        Bitmap bm = BitmapFactory.decodeByteArray(foodimage, 0, img.length);
+
+        //Toast.makeText(this, ""+foodimage, Toast.LENGTH_SHORT).show();
+
+
+         Bitmap bm = BitmapFactory.decodeByteArray(foodimage, 0, foodimage.length);
         imgFood.setImageBitmap(bm);
 
     }
@@ -79,7 +83,8 @@ public class EditFood extends AppCompatActivity {
     }
 
     public void cancel_editFood(View view) {
-        startActivity(new Intent(this, MainActivity.class));
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     private byte[] imageViewToByte(ImageView imgfood) {
@@ -146,43 +151,43 @@ public class EditFood extends AppCompatActivity {
 
     public void saveFoodChange(View view) {
 
-        String name,price;
-        name=edtNameFood.getText()+"";
-        price=edtPriceFood.getText().toString();
+        String name, price;
+        name = edtNameFood.getText() + "";
+        price = edtPriceFood.getText().toString();
 
-       byte[] imga=imageViewToByte(imgFood);
+        byte[] imga = imageViewToByte(imgFood);
 
-        if(name.matches("")||price.matches("")){
+        if (name.matches("") || price.matches("")) {
             Toast.makeText(this, "ban khong chua nhap", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
 
-            int idfood=Integer.parseInt(id);
-            XuLyMonAn xuLyMonAn=new XuLyMonAn(getApplicationContext());
+            int idfood = Integer.parseInt(id);
+            XuLyMonAn xuLyMonAn = new XuLyMonAn(getApplicationContext());
             //xuLyMonAn.updateFood(name,price,idfood,imga);
 
-            xuLyMonAn.update(imga,name,price,idfood);
+            xuLyMonAn.update(imga, name, price, idfood);
             Toast.makeText(this, "Cap nhat thanh cong", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(this,MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
         }
 
     }
 
     public void delFood(View view) {
-        XuLyMonAn xuLyMonAn=new XuLyMonAn(getApplicationContext());
+        XuLyMonAn xuLyMonAn = new XuLyMonAn(getApplicationContext());
 
         xuLyMonAn.deleteFood(id);
 
-        List<String>checkDel=xuLyMonAn.checkDelFood(id);
-        if(checkDel.size()>0){
-            Toast.makeText(this, "Xoa That bai", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this,MainActivity.class));
-
-        }else {
+        List<String> checkDel = xuLyMonAn.checkDelFood(id);
+//        if (checkDel.size() > 0) {
+//            Toast.makeText(this, "Xoa That bai", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(this, MainActivity.class));
+//
+//        } else {
 
             Toast.makeText(this, "xoa thanh cong", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this,MainActivity.class));
-        }
+            startActivity(new Intent(this, MainActivity.class));
+       // }
 
 
     }

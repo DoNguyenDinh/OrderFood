@@ -101,6 +101,8 @@ public class NewFoodActivity extends AppCompatActivity {
     String nameStyle;
     int ID;
 
+
+
     //them mon an moi vao thucdon
     public void save_Food(View view) {
 
@@ -110,12 +112,10 @@ public class NewFoodActivity extends AppCompatActivity {
         String name = edtName.getText().toString();
         String price = edtPrice.getText().toString();
 
-        // Toast.makeText(getApplicationContext(), "loai mon an la: " + nameStyle, Toast.LENGTH_SHORT).show();
 
         //lay id loai mon an
         ID = xlMonAn.getIDFoodStyle(nameStyle);
 
-        // Toast.makeText(getApplicationContext(), "ID loai mon an la: " + ID, Toast.LENGTH_SHORT).show();
 
 
         if (name.matches("") || price.matches("")) {

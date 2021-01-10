@@ -101,7 +101,6 @@ public class LoadFoodAdapter extends RecyclerView.Adapter<LoadFoodAdapter.LoadFo
 
                     Intent i = new Intent(context, EditFood.class);
 
-
                     i.putExtra("namefood", name);
                     i.putExtra("pricefood", price);
                     i.putExtra("id", id);

@@ -225,8 +225,6 @@ public class XuLyMonAn {
     public Cursor selectImage(int id) {
 
         String query_selectall = "Select * from " + dbManager.TB_MENU + " where " + dbManager.ID_FOOD + " = " + id;
-
-
         Cursor cursor = db.rawQuery(query_selectall, null);
 
 

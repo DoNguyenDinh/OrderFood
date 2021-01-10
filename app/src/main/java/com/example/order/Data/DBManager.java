@@ -19,7 +19,7 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     static final String DATABASE_NAME = "Restaurant";
-    static final int VERSION = 9;
+    static final int VERSION = 10;
 
     //loai mon an
     public String TB_FOOD_TYPE = "loaimonan";
