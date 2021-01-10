@@ -12,8 +12,10 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.order.Adapter.LoadFoodAndStyleAdapter;
 import com.example.order.Adapter.MenuAdapter;
 import com.example.order.Data.DBManager;
+import com.example.order.FoodStyle;
 import com.example.order.Menu;
 import com.example.order.R;
 import com.example.order.XuLy.XuLyMonAn;
@@ -28,6 +30,7 @@ public class MenuFragment extends Fragment {
     private RecyclerView rvMenu;
     private List<Menu> menuList;
     private MenuAdapter menuAdapter;
+    private List<FoodStyle> listStyle;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -42,9 +45,11 @@ public class MenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
         rvMenu = (RecyclerView) view.findViewById(R.id.rv_menufood);
-        menuAdapter = new MenuAdapter(getContext(), menuList);
+        //menuAdapter = new MenuAdapter(getContext(), menuList);
+
+        LoadFoodAndStyleAdapter food=new LoadFoodAndStyleAdapter(getContext(),listStyle);
         rvMenu.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvMenu.setAdapter(menuAdapter);
+        rvMenu.setAdapter(food);
         rvMenu.setHasFixedSize(true);
 
 
@@ -57,6 +62,8 @@ public class MenuFragment extends Fragment {
 
         //lay danh sach ban tu database
         menuList = xl.selectListMenu();
+
+        listStyle=xl.selectListFoodStyle();
 
 
     }

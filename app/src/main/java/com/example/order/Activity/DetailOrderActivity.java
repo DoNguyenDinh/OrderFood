@@ -37,7 +37,6 @@ public class DetailOrderActivity extends AppCompatActivity {
         rv_OrderDetail.setAdapter(orderAdapter);
         rv_OrderDetail.setHasFixedSize(true);
 
-
     }
 
     public static int madatmon;

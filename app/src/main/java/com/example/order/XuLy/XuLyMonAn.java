@@ -121,9 +121,8 @@ public class XuLyMonAn {
     }
 
 
-    //lay danh sach loai mon an
-
-    public List<String> selectListFoodStyle() {
+    //lay danh sach ten loai mon an
+    public List<String> selectListNameStyle() {
 
         String select = "Select * from " + dbManager.TB_FOOD_TYPE;
         List<String> list = new ArrayList<>();
@@ -131,12 +130,94 @@ public class XuLyMonAn {
         Cursor cs = db.rawQuery(select, null);
         if (cs.moveToFirst()) {
             do {
-
                 list.add(cs.getString(1));
             } while (cs.moveToNext());
         }
 
         return list;
+    }
+
+    //lay danh sach loai mon an
+    public List<FoodStyle> selectListFoodStyle() {
+
+        String select = "Select * from " + dbManager.TB_FOOD_TYPE;
+        List<FoodStyle> list = new ArrayList<>();
+
+        Cursor cs = db.rawQuery(select, null);
+        if (cs.moveToFirst()) {
+            do {
+
+                FoodStyle food = new FoodStyle();
+                food.setNameFoodStyle(cs.getString(1));
+                food.setId(cs.getInt(0));
+
+                list.add(food);
+            } while (cs.moveToNext());
+        }
+
+        return list;
+    }
+
+
+    //lay danh sach mon an theo loai mon an
+
+    public List<Menu> selectMenu(String name) {
+
+
+        String query_selectall = "select *" +
+                "FROM " + dbManager.TB_MENU +
+                " INNER JOIN " + dbManager.TB_FOOD_TYPE + " on " +dbManager.NAME_FOOD_TYPE +" = '"+name+"' and "+dbManager.ID_FOOD_TYPE+" = "+dbManager.STYLE_FOOD;
+
+        List<Menu> listMenu = new ArrayList<>();
+
+
+        Cursor cursor = db.rawQuery(query_selectall, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Menu menu = new Menu();
+
+                menu.setId(cursor.getInt(0));
+                menu.setNameFood(cursor.getString(1));
+                menu.setPrice(cursor.getString(2));
+                menu.setImg(cursor.getBlob(3));
+                listMenu.add(menu);
+            } while (cursor.moveToNext());
+        }
+        //db.close();
+        return listMenu;
+    }
+
+
+    //xoa loai mon an theo loai
+
+    public void deleteTypeFood(String nameType) {
+
+        db.delete(dbManager.TB_FOOD_TYPE, dbManager.NAME_FOOD_TYPE+ " =? ", new String[]{nameType });
+    }
+
+    //kiem tra xoa thanh cong
+    public List<String> checkDel(String nameType){
+
+
+        String query_selectall="select * from "+dbManager.TB_FOOD_TYPE+" where "+dbManager.NAME_FOOD_TYPE+" = '"+nameType+"'";
+        Cursor cursor = db.rawQuery(query_selectall, null);
+
+        List<String>listMenu = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                listMenu.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+        return listMenu;
+    }
+
+
+    //cap nhat ten loai
+    public void updateNameStyle(String name,int id){
+        String sql = "update " + dbManager.TB_FOOD_TYPE + " set "+ dbManager.NAME_FOOD_TYPE+" = '" + name + "' where " + dbManager.ID_FOOD_TYPE + " = " +id;
+        Cursor cs = db.rawQuery(sql, null);
+        db.execSQL(sql);
     }
 
 }

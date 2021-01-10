@@ -64,9 +64,9 @@ public class InputValues extends AppCompatActivity {
         OrderDetail detail = insertData(idOrder, idfood, quantity);
 
 
-        Toast.makeText(getApplicationContext(), "ma dat mon" + detail.getIdOrder(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getApplicationContext(), "ma mon an" + detail.getIdFood(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getApplicationContext(), "so luong " + detail.getQuantityFood(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "ma dat mon" + detail.getIdOrder(), Toast.LENGTH_SHORT).show();
+    //    Toast.makeText(getApplicationContext(), "ma mon an" + detail.getIdFood(), Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(getApplicationContext(), "so luong " + detail.getQuantityFood(), Toast.LENGTH_SHORT).show();
 
 
 //

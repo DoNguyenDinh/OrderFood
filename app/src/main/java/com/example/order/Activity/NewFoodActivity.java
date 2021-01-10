@@ -62,8 +62,8 @@ public class NewFoodActivity extends AppCompatActivity {
 
         xlMonAn = new XuLyMonAn(getApplicationContext());
         listFoodStyle = new ArrayList<>();
-        DBManager db = new DBManager(getApplicationContext());
-        listFoodStyle = xlMonAn.selectListFoodStyle();
+
+        listFoodStyle = xlMonAn.selectListNameStyle();
 
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listFoodStyle);
@@ -147,7 +147,8 @@ public class NewFoodActivity extends AppCompatActivity {
     private Menu createMenu() {
         String name = edtName.getText().toString();
         String price = edtPrice.getText().toString();
-        //imageViewToByte(imgfood);
+
+
         Menu table = new Menu(name, price, ID,imageViewToByte(imgfood));
         return table;
     }

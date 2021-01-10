@@ -152,7 +152,6 @@ public class DBManager extends SQLiteOpenHelper {
         //mo ket noi database
         SQLiteDatabase db = this.getWritableDatabase();
 
-
         //luu gia tri xuong database
         ContentValues values = new ContentValues();
         values.put(ID_TABLE_ORDER, table.getIdTable());
@@ -257,7 +256,6 @@ public class DBManager extends SQLiteOpenHelper {
         return listStaff;
     }
 
-
     //lay id dang nhap
     public Cursor GetId(String name, String pass) {
         SQLiteDatabase myDB = this.getWritableDatabase();
@@ -287,22 +285,5 @@ public class DBManager extends SQLiteOpenHelper {
         Cursor getCursor = myDB.rawQuery(sql, null);
         return getCursor;
     }
-
-
-
-
-
-
-
-
-    //store image
-
-//    public void storeImage(Image img) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        Bitmap bt = img.getBmImage();
-//
-//
-//    }
 
 }

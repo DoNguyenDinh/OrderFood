@@ -53,15 +53,13 @@ public class NewFoodStyleActivity extends AppCompatActivity {
 
     boolean checkNameStyle(String name) {
 
-
         List<String> list = new ArrayList<>();
 
-        //lay danh sach loai mon an
+        //lay danh sach ten loai mon an
+        list = xlMonAn.selectListNameStyle();
 
-
-        list = xlMonAn.selectListFoodStyle();
-        for (int i = 0; i < list.size(); i++) {
-            if (name == list.get(i)) {
+        for(int i=0;i<list.size();i++){
+            if (list.get(i).matches(name)) {
                 return true;
             }
         }
@@ -96,6 +94,7 @@ public class NewFoodStyleActivity extends AppCompatActivity {
             }
 
         }
+
 
     }
 }

@@ -82,11 +82,13 @@
 
     <TextView
         android:id="@+id/txt_tongsotien"
-        android:layout_width="131dp"
-        android:layout_height="33dp"
+        android:layout_width="322dp"
+        android:layout_height="48dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="tong tien: "
+        android:textColor="#EF0505"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_ListFoodAndPrice" />

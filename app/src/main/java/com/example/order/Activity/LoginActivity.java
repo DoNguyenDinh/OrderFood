@@ -45,12 +45,6 @@ public class LoginActivity extends AppCompatActivity {
         DBManager db = new DBManager(getApplicationContext());
 
         staffList = db.getAccount(name, pass);
-//        Cursor cs = db.GetId(name, pass);
-//        cs.moveToFirst();
-
-//        ten_nv = cs.getString(1);
-//        ma_nhan_vien=cs.getInt(0);
-//        staffList.add(ma_nhan_vien+"");
 
         return staffList;
     }

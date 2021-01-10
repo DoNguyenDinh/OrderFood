@@ -46,6 +46,8 @@
         <activity android:name=".Activity.AddFoodOrder"></activity>
         <activity android:name=".Activity.NewFoodStyleActivity"></activity>
         <activity android:name=".Activity.EditTableActivity"></activity>
+        <activity android:name=".Activity.LoadFoodActivity"></activity>
+        <activity android:name=".Activity.EditTypeFood"></activity>
 
         <!-- Activity start firts -->
         <activity android:name=".Activity.LoginActivity">
