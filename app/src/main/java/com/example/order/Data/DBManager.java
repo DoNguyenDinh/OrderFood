@@ -67,7 +67,7 @@ public class DBManager extends SQLiteOpenHelper {
     //table thucdon
     public String TB_MENU = "thucdon";
     public String PRICE_FOOD = "gia";
-    static String ID_FOOD = "mamonan";
+    public static String ID_FOOD = "mamonan";
     public String NAME_FOOD = "tenmonan";
     public String STYLE_FOOD = "loaimonan";
     public String IMAGE_FOOD = "hinhanh";

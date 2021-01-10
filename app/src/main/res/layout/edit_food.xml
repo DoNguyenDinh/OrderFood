@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:text="Gia"
+        android:text="Gia ($)"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
@@ -33,6 +33,7 @@
         android:layout_height="189dp"
         android:layout_marginStart="72dp"
         android:layout_marginTop="36dp"
+        android:onClick="chooseimageFood"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -53,6 +54,7 @@
         android:layout_height="33dp"
         android:layout_marginTop="24dp"
         android:text="="
+        android:onClick="changeImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toEndOf="@+id/img_imageFood_edit"
@@ -65,6 +67,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="64dp"
         android:text="Save"
+        android:onClick="saveFoodChange"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_imageFood_edit" />
 
@@ -85,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:text="Name"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView18"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -96,6 +99,7 @@
         android:layout_height="49dp"
         android:layout_marginTop="32dp"
         android:text="Xoa mon an"
+        android:onClick="delFood"
         app:layout_constraintEnd_toEndOf="@+id/btn_cancel_edit"
         app:layout_constraintStart_toStartOf="@+id/btn_saveChange_edit"
         app:layout_constraintTop_toBottomOf="@+id/btn_cancel_edit" />

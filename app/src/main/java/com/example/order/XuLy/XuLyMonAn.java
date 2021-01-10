@@ -166,7 +166,7 @@ public class XuLyMonAn {
 
         String query_selectall = "select *" +
                 "FROM " + dbManager.TB_MENU +
-                " INNER JOIN " + dbManager.TB_FOOD_TYPE + " on " +dbManager.NAME_FOOD_TYPE +" = '"+name+"' and "+dbManager.ID_FOOD_TYPE+" = "+dbManager.STYLE_FOOD;
+                " INNER JOIN " + dbManager.TB_FOOD_TYPE + " on " + dbManager.NAME_FOOD_TYPE + " = '" + name + "' and " + dbManager.ID_FOOD_TYPE + " = " + dbManager.STYLE_FOOD;
 
         List<Menu> listMenu = new ArrayList<>();
 
@@ -193,17 +193,17 @@ public class XuLyMonAn {
 
     public void deleteTypeFood(String nameType) {
 
-        db.delete(dbManager.TB_FOOD_TYPE, dbManager.NAME_FOOD_TYPE+ " =? ", new String[]{nameType });
+        db.delete(dbManager.TB_FOOD_TYPE, dbManager.NAME_FOOD_TYPE + " =? ", new String[]{nameType});
     }
 
     //kiem tra xoa thanh cong
-    public List<String> checkDel(String nameType){
+    public List<String> checkDel(String nameType) {
 
 
-        String query_selectall="select * from "+dbManager.TB_FOOD_TYPE+" where "+dbManager.NAME_FOOD_TYPE+" = '"+nameType+"'";
+        String query_selectall = "select * from " + dbManager.TB_FOOD_TYPE + " where " + dbManager.NAME_FOOD_TYPE + " = '" + nameType + "'";
         Cursor cursor = db.rawQuery(query_selectall, null);
 
-        List<String>listMenu = new ArrayList<>();
+        List<String> listMenu = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
                 listMenu.add(cursor.getString(1));
@@ -214,10 +214,51 @@ public class XuLyMonAn {
 
 
     //cap nhat ten loai
-    public void updateNameStyle(String name,int id){
-        String sql = "update " + dbManager.TB_FOOD_TYPE + " set "+ dbManager.NAME_FOOD_TYPE+" = '" + name + "' where " + dbManager.ID_FOOD_TYPE + " = " +id;
+    public void updateNameStyle(String name, int id) {
+        String sql = "update " + dbManager.TB_FOOD_TYPE + " set " + dbManager.NAME_FOOD_TYPE + " = '" + name + "' where " + dbManager.ID_FOOD_TYPE + " = " + id;
         Cursor cs = db.rawQuery(sql, null);
         db.execSQL(sql);
     }
 
+    //lay hinh anh mon an
+
+    public Cursor selectImage(int id) {
+
+        String query_selectall = "Select * from " + dbManager.TB_MENU + " where " + dbManager.ID_FOOD + " = " + id;
+
+
+        Cursor cursor = db.rawQuery(query_selectall, null);
+
+
+        return cursor;
+    }
+
+
+    public void update(byte[] bytes,String name,String price, int id) {
+        ContentValues cv = new ContentValues();
+        cv.put(dbManager.IMAGE_FOOD, bytes);
+        cv.put(dbManager.NAME_FOOD, name);
+        cv.put(dbManager.PRICE_FOOD, price);
+        db.update("thucdon", cv, "mamonan=" + id, null);
+    }
+
+    //xoa mon an
+    public void deleteFood(String idfood) {
+        db.delete(dbManager.TB_MENU, dbManager.ID_FOOD + " =? ", new String[]{idfood});
+    }
+
+    public List<String> checkDelFood(String id) {
+
+
+        String query_selectall = "select * from " + dbManager.TB_MENU + " where " + dbManager.ID_FOOD + " = " + id ;
+        Cursor cursor = db.rawQuery(query_selectall, null);
+
+        List<String> listMenu = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                listMenu.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+        return listMenu;
+    }
 }

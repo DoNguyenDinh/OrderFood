@@ -17,7 +17,7 @@
         android:id="@+id/cancel_load"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Cancel"
         android:onClick="cancel_load"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

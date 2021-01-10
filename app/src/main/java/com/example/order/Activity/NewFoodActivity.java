@@ -148,7 +148,6 @@ public class NewFoodActivity extends AppCompatActivity {
         String name = edtName.getText().toString();
         String price = edtPrice.getText().toString();
 
-
         Menu table = new Menu(name, price, ID,imageViewToByte(imgfood));
         return table;
     }

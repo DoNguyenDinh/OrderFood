@@ -51,7 +51,7 @@ public class EditTypeFood extends AppCompatActivity {
     }
 
     public void cancel_editType(View view) {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     public void saveChangeEditType(View view) {
