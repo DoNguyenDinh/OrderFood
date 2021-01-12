@@ -93,10 +93,10 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     //table datmon
-    public static String TB_ORDER = "datmon";
+    public String TB_ORDER = "datmon";
     public static String ID_ORDER = "madatmon";
-    public static String ID_TABLE_ORDER = "mabandat";
-    public static String STATUS_ORDER = "trangthai";
+    public String ID_TABLE_ORDER = "mabandat";
+    public String STATUS_ORDER = "trangthai";
 
     private String createOrder = "CREATE TABLE " + TB_ORDER + " ( " +
             ID_ORDER + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -265,25 +265,6 @@ public class DBManager extends SQLiteOpenHelper {
 
 
         return getIdAccount;
-    }
-
-    //lay ma dat mon an
-    public Cursor getIDOrder() {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        String sql = "select * from datmon order by madatmon desc limit 1";
-        Cursor cs = db.rawQuery(sql, null);
-        return cs;
-    }
-
-
-    //get name login
-    public Cursor getNameLogin(int id) {
-        SQLiteDatabase myDB = this.getWritableDatabase();
-
-        String sql = "Select * from " + TB_STAFF + " where manv = " + id;
-        Cursor getCursor = myDB.rawQuery(sql, null);
-        return getCursor;
     }
 
 }

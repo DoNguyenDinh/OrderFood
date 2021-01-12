@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         anhxa();
 
-
-
     }
 
     private void anhxa() {
@@ -64,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
     public void table_Order(View view) {
 
         Intent i = new Intent(MainActivity.this, Order_Activity.class);
-
-
         startActivity(i);
 
     }
@@ -79,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
         name = bundle.getString("nameLogin");
 
     }
-
-
 
 
     //mở activity thêm món ăn
@@ -107,6 +101,6 @@ public class MainActivity extends AppCompatActivity {
 
     //thanh toán tiền hóa đơn
     public void payMoney(View view) {
-     //startActivity(new Intent(MainActivity.this,PayActivity.class));
+     startActivity(new Intent(MainActivity.this,PayActivity.class));
     }
 }

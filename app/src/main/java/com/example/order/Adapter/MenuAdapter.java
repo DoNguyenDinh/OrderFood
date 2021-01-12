@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.example.order.Activity.Order_Activity;
 import com.example.order.Data.DBManager;
 import com.example.order.Menu;
 import com.example.order.R;
+import com.example.order.XuLy.XuLyDatMon;
 
 
 import java.util.List;
@@ -55,7 +57,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         holder.mID.setText(mMenu.getId() + "");
 
         byte[] foodimage = mMenu.getImg();
-        Bitmap bm = BitmapFactory.decodeByteArray(foodimage,0,foodimage.length);
+        Bitmap bm = BitmapFactory.decodeByteArray(foodimage, 0, foodimage.length);
 
         holder.img.setImageBitmap(bm);
 
@@ -87,17 +89,21 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             btn_insertFood.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
-                    DBManager db = new DBManager(context);
-
+                    XuLyDatMon xlDatMon = new XuLyDatMon(context);
 
                     //lay ma dat mon moi nhat
-                    Cursor cs = db.getIDOrder();
+                    Cursor cs = xlDatMon.getIDOrder();
+
                     cs.moveToFirst();
-                    String idOrder;
-                    idOrder = cs.getString(0);
+                    String idOrder = null;
+                    if (Integer.parseInt(cs.getString(0)) == -1) {
+
+                    } else {
+                        idOrder = cs.getString(0);
+                    }
+
                     int idorder = Integer.parseInt(idOrder);
+
 
                     Intent i = new Intent(context, InputValues.class);
                     i.putExtra("tenmonan", mTextName.getText().toString());
@@ -105,6 +111,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                     i.putExtra("madatmonan", idorder);
 
                     context.startActivity(i);
+
 
                 }
 

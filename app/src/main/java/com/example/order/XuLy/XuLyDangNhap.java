@@ -30,4 +30,13 @@ public class XuLyDangNhap {
         return cs;
     }
 
+
+    //lay ten nhan vien dang nhap
+    public Cursor getNameLogin(int id) {
+
+        String sql = "Select * from " + dbManager.TB_STAFF + " where manv = " + id;
+        Cursor getCursor = db.rawQuery(sql, null);
+        return getCursor;
+    }
+
 }

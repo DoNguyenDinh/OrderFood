@@ -19,9 +19,9 @@
 
     <TextView
         android:id="@+id/txt_soluong"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:text="so luong"
         android:textSize="24sp">
 
@@ -29,8 +29,8 @@
 
     <TextView
         android:id="@+id/txt_thanhtien"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:text="thanh tien"
         android:textSize="24sp">

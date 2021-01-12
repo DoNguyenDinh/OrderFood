@@ -31,7 +31,7 @@ public class XuLyBanAn {
         long result = db.insert(dbManager.TB_TABLEFOOD, null, values);
 
         //dong ket noi
-       // db.close();
+        // db.close();
         return result;
     }
 
@@ -46,6 +46,18 @@ public class XuLyBanAn {
         return cs;
     }
 
+
+    //lay ten ban an theo ma ban an
+
+    public String nameTable(int id) {
+
+        String sql = "select "+dbManager.NAME_TABLE+" from "+dbManager.TB_TABLEFOOD +" where "+dbManager.ID_TABLE+" = "+id;
+
+        Cursor cs=db.rawQuery(sql,null);
+        cs.moveToFirst();
+        String name = cs.getString(0);
+        return name;
+    }
 
     //lay danh sach ban an
     public List<Table> selectListTable() {
@@ -65,7 +77,7 @@ public class XuLyBanAn {
                 listTable.add(table);
             } while (cursor.moveToNext());
         }
-  // db.close();
+        // db.close();
         return listTable;
     }
 
@@ -84,7 +96,7 @@ public class XuLyBanAn {
                 listUserName.add(cursor.getString(1));
             } while (cursor.moveToNext());
         }
-     // db.close();
+        // db.close();
         return listUserName;
     }
 

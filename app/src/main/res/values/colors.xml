@@ -11,5 +11,6 @@
     <color name="red">#FF0000</color>
     <color name="rv_list_food">#99ebff</color>
     <color name="silver">#BFBFBF</color>
+    <color name="order">#66ffe0</color>
 
 </resources>

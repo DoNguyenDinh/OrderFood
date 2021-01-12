@@ -28,10 +28,9 @@
             android:src="@drawable/food_table"></ImageView>
 
 
-
         <TextView
             android:id="@+id/txt_tableName"
-            android:layout_width="260dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:background="@color/custom"
@@ -40,9 +39,8 @@
 
         <Button
             android:id="@+id/btn_edit_table"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:text="+" />
 
 

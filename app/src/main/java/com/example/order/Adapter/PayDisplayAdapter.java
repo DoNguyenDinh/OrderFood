@@ -44,7 +44,7 @@ public class PayDisplayAdapter extends RecyclerView.Adapter<PayDisplayAdapter.Pa
         ShowOrder order = orderList.get(position);
         holder.txtten.setText( order.getTenmonan()+"");
         holder.txtsoluong.setText( order.getSoluong()+"");
-        holder.txtthanhtien.setText(order.getThanhtien()+"");
+        holder.txtthanhtien.setText(order.getThanhtien()+"$");
 
     }
 

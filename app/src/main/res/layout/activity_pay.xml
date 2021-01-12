@@ -7,55 +7,54 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/ln_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:id="@+id/txt_ten"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Ten"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+
+            android:textSize="24sp">
 
         </TextView>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginLeft="100dp"
-            android:text="so luong"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/txt_soluong"
+            android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:text="thanh tien"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:text="so luong"
+            android:textSize="24sp">
 
         </TextView>
 
+        <TextView
+            android:id="@+id/txt_thanhtien"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:text="thanh tien"
+            android:textSize="20sp">
+
+        </TextView>
 
     </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ListFoodAndPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/ln_1"
         tools:layout_editor_absoluteX="73dp" />
 
     <Button

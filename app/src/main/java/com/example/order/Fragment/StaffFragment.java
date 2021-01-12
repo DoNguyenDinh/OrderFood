@@ -22,6 +22,7 @@ import com.example.order.Adapter.TableAdapter;
 import com.example.order.Data.DBManager;
 import com.example.order.R;
 import com.example.order.Table;
+import com.example.order.XuLy.XuLyDangNhap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +56,8 @@ public class StaffFragment extends Fragment {
         String nameLogin;
         if(id!=0){
             DBManager db=new DBManager(getContext());
-
-            Cursor cs = db.getNameLogin(id);
+            XuLyDangNhap xlDangNhap=new XuLyDangNhap(getContext());
+            Cursor cs = xlDangNhap.getNameLogin(id);
             cs.moveToFirst();
             nameLogin=cs.getString(1);
 
@@ -66,8 +67,6 @@ public class StaffFragment extends Fragment {
         else {
             Toast.makeText(getContext(),"fail",Toast.LENGTH_SHORT).show();
         }
-
-
 
     }
 

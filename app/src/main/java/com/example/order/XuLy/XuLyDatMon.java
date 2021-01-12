@@ -24,15 +24,6 @@ public class XuLyDatMon {
     }
 
 
-    public Cursor getIDOrder() {
-
-
-        //String sql="select * from "+dbManager.TB_ORDER+"order by "+"";
-        String sql = "select * from datmon order by madatmon desc limit 1";
-        Cursor cs = db.rawQuery(sql, null);
-        return cs;
-    }
-
     //insert data table chitietdatmon
     public long insertDataDetail(OrderDetail detail) {
 
@@ -63,10 +54,10 @@ public class XuLyDatMon {
     }
 
     //lay danh sach mon an da dat
-    public List<String> selectListFoodOrdered(int idorder,int idfood) {
+    public List<String> selectListFoodOrdered(int idorder, int idfood) {
 
-        String select = "Select * from " + dbManager.TB_ORDER_DETAIL +" where "+dbManager.ID_ORDER_ORDER+" = "+idorder +
-                " and "+dbManager.ID_FOOD_ORDER+" = "+idfood;
+        String select = "Select * from " + dbManager.TB_ORDER_DETAIL + " where " + dbManager.ID_ORDER_ORDER + " = " + idorder +
+                " and " + dbManager.ID_FOOD_ORDER + " = " + idfood;
         List<String> list = new ArrayList<>();
 
         Cursor cs = db.rawQuery(select, null);
@@ -108,7 +99,7 @@ public class XuLyDatMon {
                 listInfo.add(staff);
             } while (cursor.moveToNext());
         }
-       // db.close();
+        // db.close();
         return listInfo;
     }
 
@@ -118,7 +109,6 @@ public class XuLyDatMon {
         db.delete(dbManager.TB_ORDER_DETAIL, " madatmonan =? and mamonan=?", new String[]{madatmon + "", mamonan + ""});
 
     }
-
 
 
     //lay danh sach mon an theo ma dat mon
@@ -145,5 +135,16 @@ public class XuLyDatMon {
         }
         //db.close();
         return listInfo;
+    }
+
+
+    //lay ma dat mon an
+    public Cursor getIDOrder() {
+
+        String sql = "select "+dbManager.ID_ORDER+" from " + dbManager.TB_ORDER + " where " + dbManager.STATUS_ORDER +
+                " = 1 " + " order by madatmon desc limit 1";
+        Cursor cs = db.rawQuery(sql, null);
+
+        return cs;
     }
 }

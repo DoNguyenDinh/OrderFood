@@ -16,9 +16,9 @@
 
         <TextView
             android:id="@+id/txt_nameFood_OrderDetail"
-            android:layout_width="98dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+           android:layout_marginLeft="10dp"
             android:textSize="24sp"
             android:text="TextView" />
 
@@ -26,17 +26,21 @@
             android:id="@+id/txt_quantityFood_OrderDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="3"
+            android:layout_marginLeft="10dp"
             android:textSize="24sp" />
 
         <Button
             android:id="@+id/btn_edit_OrderDetail"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/edit" />
+            android:background="@drawable/edit"
+            android:layout_marginLeft="20dp"/>
 
         <Button
             android:id="@+id/btn_delete_OrderDetail"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="20dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/delete"/>
