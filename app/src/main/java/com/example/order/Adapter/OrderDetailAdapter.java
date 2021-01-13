@@ -102,6 +102,7 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
 
                     i.putExtra("tenmonan",txtName);
                     i.putExtra("soluong",slg);
+                    i.setFlags(FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(i);
                 }
             });

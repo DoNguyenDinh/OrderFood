@@ -30,7 +30,6 @@ public class Order_Activity extends AppCompatActivity {
     List<Menu> menuList;
     XuLyMonAn xl;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,20 +49,15 @@ public class Order_Activity extends AppCompatActivity {
 
         //thay doi tieu de
         setTitle(R.string.Order);
-
         getData();
         initData();
-
     }
 
 
-    //luu
+
     public void back_activitymain(View view) {
 
         Intent i = new Intent(this, MainActivity.class);
-
-        DBManager db = new DBManager(getApplicationContext());
-
         startActivity(i);
     }
 
@@ -71,33 +65,21 @@ public class Order_Activity extends AppCompatActivity {
     //load danh sach monan
     private void initData() {
         menuList = new ArrayList<>();
-        DBManager dbManager = new DBManager(this);
 
+        xl = new XuLyMonAn(getApplicationContext());
         //lay danh sach mon an tu database
         menuList = xl.selectListMenu();
 
     }
 
-    int vitri = 0;
     static int maban = 0;
 
     //lay id ban an
     void getData() {
-
-        Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
-
         maban = bundle.getInt("mabanan");
         Toast.makeText(this, "ma ban" + maban, Toast.LENGTH_SHORT).show();
-
         tableChoose.setText("Please choose food and drink " + "( " + maban + ")");
-    }
-
-
-    //create new order
-    private Order createOrder() {
-        Order order = new Order(maban);
-        return order;
     }
 
 
@@ -105,16 +87,14 @@ public class Order_Activity extends AppCompatActivity {
     public void newOrder(View view) {
 
         Order or = new Order(maban);
-        DBManager db = new DBManager(getApplicationContext());
-        long a = db.addOrder(or);
+        XuLyDatMon xl=new XuLyDatMon(getApplicationContext());
+        long a = xl.addOrder(or);
         if (a > 0) {
             Toast.makeText(this, "them thanh cong", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Them that bai", Toast.LENGTH_SHORT).show();
-
         }
     }
-
 }
 
 

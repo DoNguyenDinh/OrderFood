@@ -100,10 +100,8 @@ public class NewTableActivity extends AppCompatActivity {
         rvTable = (RecyclerView) findViewById(R.id.rv_table);
     }
 
-
     public void cancel_table(View view) {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
-
 }

@@ -145,6 +145,41 @@ public class XuLyDatMon {
                 " = 1 " + " order by madatmon desc limit 1";
         Cursor cs = db.rawQuery(sql, null);
 
+
         return cs;
+    }
+
+    //lay danh sach da dat mon
+    public List<Order> selectListOrdered() {
+        String query_selectall = "Select * from " + dbManager.TB_ORDER + " where " + dbManager.STATUS_ORDER + " = 1";
+        List<Order> listTable = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery(query_selectall, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Order table = new Order();
+
+                table.setId(cursor.getInt(0));
+                table.setIdTable(Integer.parseInt(cursor.getString(1)));
+
+                listTable.add(table);
+            } while (cursor.moveToNext());
+        }
+        //db.close();
+        return listTable;
+    }
+
+    //them dat mon moi
+    public long addOrder(Order table) {
+
+        //luu gia tri xuong database
+        ContentValues values = new ContentValues();
+        values.put(dbManager.ID_TABLE_ORDER, table.getIdTable());
+        long result = db.insert(dbManager.TB_ORDER, null, values);
+
+        //dong ket noi
+       // db.close();
+        return result;
     }
 }

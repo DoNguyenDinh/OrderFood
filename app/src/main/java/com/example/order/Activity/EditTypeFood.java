@@ -41,7 +41,6 @@ public class EditTypeFood extends AppCompatActivity {
 
     private void setDataView() {
         getData();
-
         edtNameType.setText(nameStyle);
     }
 

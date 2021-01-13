@@ -29,6 +29,7 @@ public class InputValues extends AppCompatActivity {
     private EditText edtQuantity;
     private TextView txtNameFood, txtIDFood;
     private Button btnInsertOrder;
+    int idOrder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,16 +64,7 @@ public class InputValues extends AppCompatActivity {
 
         OrderDetail detail = insertData(idOrder, idfood, quantity);
 
-
-//        Toast.makeText(getApplicationContext(), "ma dat mon" + detail.getIdOrder(), Toast.LENGTH_SHORT).show();
-    //    Toast.makeText(getApplicationContext(), "ma mon an" + detail.getIdFood(), Toast.LENGTH_SHORT).show();
-      //  Toast.makeText(getApplicationContext(), "so luong " + detail.getQuantityFood(), Toast.LENGTH_SHORT).show();
-
-
-//
-//        //kiem tra mon an da ton tai trong order chua
-//
-
+      //kiem tra mon an da ton tai trong order chua
         List<String> n = new ArrayList<>();
         n = xlDatMon.selectListFoodOrdered(idOrder, idfood);
         Toast.makeText(getApplicationContext(), "check: " + n.size(), Toast.LENGTH_SHORT).show();
@@ -88,7 +80,7 @@ public class InputValues extends AppCompatActivity {
             if (checkResult > 0) {
                 int mabanan = Order_Activity.maban;
 
-                //gan gia tri ban da duoc dat
+                //cap nhat trang thai ban da duoc dat
                 xlBanAn.updateTableStatus(mabanan, false);
 
                 Toast.makeText(getApplicationContext(), "them thanh cong", Toast.LENGTH_SHORT).show();
@@ -97,10 +89,7 @@ public class InputValues extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "them that bai", Toast.LENGTH_SHORT).show();
             }
         }
-
     }
-
-    int idOrder;
 
     //lay gia tri tu menudapter
     void getData() {
@@ -118,9 +107,7 @@ public class InputValues extends AppCompatActivity {
 
     //insert mon an
     OrderDetail insertData(int idorder, int idFood, int quantity) {
-
         OrderDetail detail = new OrderDetail(idorder, idFood, quantity);
         return detail;
-
     }
 }

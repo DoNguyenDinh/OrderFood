@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.order.Fragment.MenuFragment;
 import com.example.order.Fragment.OrderFragment;
-import com.example.order.Fragment.ReportFragment;
 import com.example.order.Fragment.StaffFragment;
 import com.example.order.Fragment.TableFragment;
 

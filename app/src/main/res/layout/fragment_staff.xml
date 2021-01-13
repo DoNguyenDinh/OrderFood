@@ -8,6 +8,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -24,7 +25,7 @@
         <TextView
             android:id="@+id/txt_name_staff"
             android:layout_width="250dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:text="name"
             android:textSize="34sp"
             android:textStyle="bold"
@@ -34,7 +35,7 @@
             android:id="@+id/btn_LogOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="logout"
+            android:onClick="logOut"
             android:text="LOG OUT" />
 
     </LinearLayout>

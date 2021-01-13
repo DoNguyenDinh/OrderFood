@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.example.order.Menu;
 import com.example.order.R;
 import com.example.order.XuLy.XuLyMonAn;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class LoadFoodAdapter extends RecyclerView.Adapter<LoadFoodAdapter.LoadFoodViewHolder> {
@@ -87,7 +89,7 @@ public class LoadFoodAdapter extends RecyclerView.Adapter<LoadFoodAdapter.LoadFo
 
 
                     String name, price, id;
-                    byte[] img;
+                    byte[] image;
 
                     name = mTextName.getText() + "";
                     price = mTextPrice.getText() + "";
@@ -96,15 +98,14 @@ public class LoadFoodAdapter extends RecyclerView.Adapter<LoadFoodAdapter.LoadFo
                     XuLyMonAn xl = new XuLyMonAn(context);
                     Cursor cs = xl.selectImage(Integer.parseInt(id));
                     cs.moveToFirst();
-
-                    img = cs.getBlob(3);
+                    image = cs.getBlob(3);
 
                     Intent i = new Intent(context, EditFood.class);
 
                     i.putExtra("namefood", name);
                     i.putExtra("pricefood", price);
                     i.putExtra("id", id);
-                    i.putExtra("image", img);
+                    i.putExtra("image", image);
                     context.startActivity(i);
 
                 }

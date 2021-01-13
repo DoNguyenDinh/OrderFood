@@ -1,6 +1,7 @@
 package com.example.order.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -45,36 +46,22 @@ public class StaffFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_staff, container, false);
         anhxa(view);
-
-
         return view;
     }
 
     private void anhxa(View view) {
-
-        int id=LoginActivity.ma_nhan_vien;
-        String nameLogin;
-        if(id!=0){
-            DBManager db=new DBManager(getContext());
-            XuLyDangNhap xlDangNhap=new XuLyDangNhap(getContext());
-            Cursor cs = xlDangNhap.getNameLogin(id);
-            cs.moveToFirst();
-            nameLogin=cs.getString(1);
-
-            txt_name_staff = view.findViewById(R.id.txt_name_staff);
-            txt_name_staff.setText(nameLogin);
+        txt_name_staff = view.findViewById(R.id.txt_name_staff);
+        int id = LoginActivity.ma_nhan_vien;
+        if (id != 0) {
+            txt_name_staff.setText(LoginActivity.ten_nv);
+        } else {
+            Toast.makeText(getContext(), "fail", Toast.LENGTH_SHORT).show();
         }
-        else {
-            Toast.makeText(getContext(),"fail",Toast.LENGTH_SHORT).show();
-        }
-
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
-
 }

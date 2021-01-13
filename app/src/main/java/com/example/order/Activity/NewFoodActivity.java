@@ -97,26 +97,19 @@ public class NewFoodActivity extends AppCompatActivity {
         imgfood = (ImageView) findViewById(R.id.img_imageFood);
     }
 
-
     String nameStyle;
     int ID;
 
-
-
     //them mon an moi vao thucdon
     public void save_Food(View view) {
-
 
         XuLyMonAn xlMonAn = new XuLyMonAn(getApplicationContext());
 
         String name = edtName.getText().toString();
         String price = edtPrice.getText().toString();
 
-
         //lay id loai mon an
         ID = xlMonAn.getIDFoodStyle(nameStyle);
-
-
 
         if (name.matches("") || price.matches("")) {
             Toast.makeText(getApplicationContext(), "chua nhap", Toast.LENGTH_SHORT).show();
@@ -134,11 +127,12 @@ public class NewFoodActivity extends AppCompatActivity {
         }
     }
 
+    //chuyen kieu du lieu anh tu imageview sang byte[]
     private byte[] imageViewToByte(ImageView imageView) {
-        Bitmap bm = ((BitmapDrawable) imgfood.getDrawable()).getBitmap();
+        Bitmap bm = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] byteArray = stream.toByteArray();
         return byteArray;
     }
@@ -148,7 +142,7 @@ public class NewFoodActivity extends AppCompatActivity {
         String name = edtName.getText().toString();
         String price = edtPrice.getText().toString();
 
-        Menu table = new Menu(name, price, ID,imageViewToByte(imgfood));
+        Menu table = new Menu(name, price, ID, imageViewToByte(imgfood));
         return table;
     }
 

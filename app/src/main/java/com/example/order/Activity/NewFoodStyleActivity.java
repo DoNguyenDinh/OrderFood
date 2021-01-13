@@ -28,7 +28,6 @@ public class NewFoodStyleActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_new_foodstyle);
-        xlMonAn = new XuLyMonAn(this);
         anhxa();
     }
 
@@ -36,9 +35,7 @@ public class NewFoodStyleActivity extends AppCompatActivity {
         edt_nameStyleFood = (EditText) findViewById(R.id.edt_nameStyleFood);
         btnAddNewStyle = (Button) findViewById(R.id.btn_newFoodStyle);
         btnCanel = (Button) findViewById(R.id.btn_cancel_stylefood);
-
     }
-
 
     //create new food
     private FoodStyle createNew(String name) {
@@ -50,11 +47,10 @@ public class NewFoodStyleActivity extends AppCompatActivity {
         startActivity(new Intent(this, NewFoodActivity.class));
     }
 
-
     boolean checkNameStyle(String name) {
 
         List<String> list = new ArrayList<>();
-
+        xlMonAn = new XuLyMonAn(this);
         //lay danh sach ten loai mon an
         list = xlMonAn.selectListNameStyle();
 
@@ -64,13 +60,12 @@ public class NewFoodStyleActivity extends AppCompatActivity {
             }
         }
         return false;
-
     }
 
     public void newfoodstyle(View view) {
 
         String name = edt_nameStyleFood.getText() + "";
-
+        xlMonAn = new XuLyMonAn(this);
         if (name.matches("") || name == null) {
             Toast.makeText(this, "chua nhap ten loai mon an", Toast.LENGTH_SHORT).show();
 
@@ -80,16 +75,12 @@ public class NewFoodStyleActivity extends AppCompatActivity {
                 Toast.makeText(this, "loai mon an nay da ton tai", Toast.LENGTH_SHORT).show();
             } else {
                 FoodStyle food = createNew(name);
-
                 long result = xlMonAn.addFoodStyle(food);
-                Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
 
                 if (result > 0) {
                     Toast.makeText(this, "Them thanh cong", Toast.LENGTH_SHORT).show();
-
                 } else {
                     Toast.makeText(this, "Them that bai", Toast.LENGTH_SHORT).show();
-
                 }
             }
 

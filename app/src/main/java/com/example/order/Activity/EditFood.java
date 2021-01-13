@@ -41,19 +41,13 @@ public class EditFood extends AppCompatActivity {
 
         edtNameFood.setText(name);
         edtPriceFood.setText(price);
-        byte[] foodimage = img;
 
-        //Toast.makeText(this, ""+foodimage, Toast.LENGTH_SHORT).show();
-
-
-         Bitmap bm = BitmapFactory.decodeByteArray(foodimage, 0, foodimage.length);
+        Bitmap bm = BitmapFactory.decodeByteArray(img, 0, img.length);
         imgFood.setImageBitmap(bm);
 
     }
 
-
     String name, price, id;
-
     byte[] img;
 
     //lay du lieu tu loadfoodadapter
@@ -179,15 +173,15 @@ public class EditFood extends AppCompatActivity {
         xuLyMonAn.deleteFood(id);
 
         List<String> checkDel = xuLyMonAn.checkDelFood(id);
-//        if (checkDel.size() > 0) {
-//            Toast.makeText(this, "Xoa That bai", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(this, MainActivity.class));
-//
-//        } else {
+        if (checkDel.size() > 0) {
+            Toast.makeText(this, "Xoa That bai", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MainActivity.class));
+
+        } else {
 
             Toast.makeText(this, "xoa thanh cong", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, MainActivity.class));
-       // }
+        }
 
 
     }

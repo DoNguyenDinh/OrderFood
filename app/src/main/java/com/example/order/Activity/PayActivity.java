@@ -26,7 +26,8 @@ public class PayActivity extends AppCompatActivity {
     RecyclerView rv_pay;
     List<ShowOrder> listPay;
     TextView txttongtien;
-
+    XuLyDatMon xlDatMon;
+    XuLyBanAn xlbanAn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,12 +37,8 @@ public class PayActivity extends AppCompatActivity {
         anhxa();
         txttongtien = (TextView) findViewById(R.id.txt_tongsotien);
 
-        XuLyDatMon xlDatMon=new XuLyDatMon(getApplicationContext());
-
-
+        xlDatMon = new XuLyDatMon(getApplicationContext());
         int iddatmon = Integer.parseInt(txt);
-
-
         listPay = xlDatMon.getInfo(iddatmon);
 
         int giatien = 0;
@@ -76,9 +73,8 @@ public class PayActivity extends AppCompatActivity {
 
     //lay du lieu tu orderadapter
     void getData() {
-        Intent intent = getIntent();
-        Bundle bundle = getIntent().getExtras();
 
+        Bundle bundle = getIntent().getExtras();
         txt = bundle.getString("madatmon");
         maban = bundle.getInt("maban");
 
@@ -88,17 +84,15 @@ public class PayActivity extends AppCompatActivity {
 
         DBManager db = new DBManager(getApplicationContext());
 
-        XuLyBanAn xlbanAn=new XuLyBanAn(getApplicationContext());
+        xlbanAn = new XuLyBanAn(getApplicationContext());
         int iddatmon = Integer.parseInt(txt);
         db.updateStatusorder(iddatmon);
-
 
         Toast.makeText(this, "Thanh toan thanh cong", Toast.LENGTH_SHORT).show();
 
         //cap nhat lai trang thai ban chua duoc dat
         xlbanAn.updateTableStatus(maban, true);
         startActivity(new Intent(this, MainActivity.class));
-//
 
     }
 }

@@ -25,30 +25,28 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin, btnSignup;
     List<Staff> staffList;
     public static int ma_nhan_vien = 0;
-    public static String ten_nv;
+    public static String ten_nv="";
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-
-
         setTitle(R.string.login);
         anhxa();
     }
 
 
     //lay thong tin dang nhap cua nhan vien
-    public List<Staff> getListStaff(String name, String pass) {
+    public List<Staff> getListStaff(String username, String pass) {
 
         staffList = new ArrayList<>();
         DBManager db = new DBManager(getApplicationContext());
-
-        staffList = db.getAccount(name, pass);
+        staffList = db.getAccount(username, pass);
 
         return staffList;
     }
+
 
     public void login(View view) {
 
@@ -56,27 +54,33 @@ public class LoginActivity extends AppCompatActivity {
         String pass = edtPassWord.getText().toString();
         XuLyDangNhap xuLyDangNhap = new XuLyDangNhap(getApplicationContext());
 
-        DBManager db = new DBManager(getApplicationContext());
         if (name.matches("") || pass.matches("")) {
             Toast.makeText(getApplicationContext(), "chua nhap", Toast.LENGTH_SHORT).show();
         } else {
 
-            if (getListStaff(name, pass).size() == 0) {
-                Toast.makeText(getApplicationContext(), "tai khoan khong ton tai", Toast.LENGTH_SHORT).show();
-            } else {
+            boolean checkUser=checkUserName(name);
+            if (checkUser) {
 
+
+                if (xuLyDangNhap.checkPass(name,pass)){
                     Intent i = new Intent(this, MainActivity.class);
-                    Cursor cs = db.GetId(name, pass);
-                    cs.moveToFirst();
 
+                    //lay thong tin dang nhap cua nhan vien
+                    Cursor cs = xuLyDangNhap.GetId(name, pass);
+                    cs.moveToFirst();
                     ten_nv = cs.getString(1);
                     ma_nhan_vien = cs.getInt(0);
-                    Toast.makeText(getApplicationContext(), "Chao mung ban : " + ten_nv, Toast.LENGTH_SHORT).show();
 
+                    Toast.makeText(getApplicationContext(), "Chao mung ban : " + ten_nv, Toast.LENGTH_SHORT).show();
                     startActivity(i);
 
+                }else {
+                    Toast.makeText(getApplicationContext(), "Sai mat khau !!!!", Toast.LENGTH_SHORT).show();
                 }
 
+            } else {
+                Toast.makeText(getApplicationContext(), "tai khoan khong ton tai", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -87,8 +91,23 @@ public class LoginActivity extends AppCompatActivity {
         btnSignup = (Button) findViewById(R.id.btn_signup_login);
     }
 
+    List<String>listUser;
+    //kiem tra username da ton tai chua
+    public boolean checkUserName(String userName){
 
-    //
+        listUser=new ArrayList<>();
+
+
+        XuLyDangNhap xuLyDangNhap=new XuLyDangNhap(getApplicationContext());
+
+        listUser= xuLyDangNhap.selectListNameUser(userName);
+        if (listUser.size()==0){
+            return false;
+        }
+        return true;
+    }
+
+    // mo trang dang ky
     public void create_New_Account(View view) {
         Intent i = new Intent(this, SignupActivity.class);
         startActivity(i);

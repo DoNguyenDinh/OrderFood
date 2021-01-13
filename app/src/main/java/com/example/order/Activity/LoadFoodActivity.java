@@ -62,4 +62,8 @@ public class LoadFoodActivity extends AppCompatActivity {
     public void cancel_load(View view) {
         startActivity(new Intent(this,MainActivity.class));
     }
+
+    public void newFood_Load(View view) {
+        startActivity(new Intent(this,NewFoodActivity.class));
+    }
 }

@@ -94,12 +94,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             txtTotalMoney = (TextView) itemView.findViewById(R.id.txt_TotalCost_order);
             txtIDTable=(TextView)itemView.findViewById(R.id.txt_id_table_order) ;
 
-
-
             btn_pay = (Button) itemView.findViewById(R.id.btn_pay);
             btn_pay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Intent i = new Intent(context, PayActivity.class);
                     String madatmon = txtIDOrder.getText() + "";
                     int maban = Integer.parseInt(txtIDTable.getText() + "");
@@ -114,6 +113,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             btn_detailOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Intent i = new Intent(context, DetailOrderActivity.class);
                     int madatmon = Integer.parseInt(txtIDOrder.getText() + "");
                     int maban = Integer.parseInt(txtIDTable.getText() + "");

@@ -19,7 +19,7 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     static final String DATABASE_NAME = "Restaurant";
-    static final int VERSION = 10;
+    static final int VERSION = 12;
 
     //loai mon an
     public String TB_FOOD_TYPE = "loaimonan";
@@ -82,12 +82,14 @@ public class DBManager extends SQLiteOpenHelper {
     //table nhanvien
     public String TB_STAFF = "nhanvien";
     public String ID_STAFF = "manv";
-    public String NAME_STAFF = "tennv";
+    public String USER_NAME = "tendangnhap";
+    public String STAFF_NAME = "tennv";
     public String PASS_STAFF = "matkhau";
     public String RULE_STAFF = "quyen";
     private String createStaff = "CREATE TABLE " + TB_STAFF + " ( " +
             ID_STAFF + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            NAME_STAFF + " TEXT, " +
+            STAFF_NAME + " TEXT, " +
+            USER_NAME + " TEXT, " +
             PASS_STAFF + " TEXT, " +
             RULE_STAFF + " TEXT default 1)";
 
@@ -147,22 +149,6 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-    //them dat mon moi
-    public long addOrder(Order table) {
-        //mo ket noi database
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        //luu gia tri xuong database
-        ContentValues values = new ContentValues();
-        values.put(ID_TABLE_ORDER, table.getIdTable());
-        long result = db.insert(TB_ORDER, null, values);
-
-        //dong ket noi
-        db.close();
-        return result;
-    }
-
-
     //lay danh sach da dat mon
     public List<Order> selectListOrdered() {
         String query_selectall = "Select * from " + TB_ORDER + " where " + STATUS_ORDER + " = 1";
@@ -204,8 +190,9 @@ public class DBManager extends SQLiteOpenHelper {
 
         //luu gia tri xuong database
         ContentValues values = new ContentValues();
-        values.put(NAME_STAFF, staff.getUserName());
+        values.put(USER_NAME, staff.getUserName());
         values.put(PASS_STAFF, staff.getPassword());
+        values.put(STAFF_NAME, staff.getNameStaff());
         long ck = db.insert(TB_STAFF, null, values);
 
         //dong ket noi
@@ -213,29 +200,12 @@ public class DBManager extends SQLiteOpenHelper {
         return ck;
     }
 
-    //lay danh sach ten dang nhap
-    public List<String> selectListNameUser(String userName) {
-
-        String query_selectall = "Select * from " + TB_STAFF + " where tennv='" + userName + "'";
-        List<String> listUserName = new ArrayList<>();
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query_selectall, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-
-                listUserName.add(cursor.getString(1));
-            } while (cursor.moveToNext());
-        }
-        db.close();
-        return listUserName;
-    }
 
     //lay thong tin dang nhap cua nguoi dung
-    public List<Staff> getAccount(String name, String pass) {
+    public List<Staff> getAccount(String username, String pass) {
 
-        String query_selectall = "Select * from " + TB_STAFF + " where tennv = '" + name + "' and matkhau= '" + pass + "'";
+        String query_selectall = "Select * from " + TB_STAFF + " where " + USER_NAME + "= '" +
+                username + "' and " + PASS_STAFF + " = '" + pass + "'";
         List<Staff> listStaff = new ArrayList<>();
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -248,6 +218,7 @@ public class DBManager extends SQLiteOpenHelper {
                 staff.setId(cursor.getInt(0));
                 staff.setUserName(cursor.getString(1));
                 staff.setPassword(cursor.getString(2));
+                staff.setNameStaff(cursor.getString(3));
 
                 listStaff.add(staff);
             } while (cursor.moveToNext());
@@ -256,15 +227,6 @@ public class DBManager extends SQLiteOpenHelper {
         return listStaff;
     }
 
-    //lay id dang nhap
-    public Cursor GetId(String name, String pass) {
-        SQLiteDatabase myDB = this.getWritableDatabase();
 
-        String sql = "Select * from " + TB_STAFF + " where tennv = '" + name + "' and matkhau= '" + pass + "'";
-        Cursor getIdAccount = myDB.rawQuery(sql, null);
-
-
-        return getIdAccount;
-    }
 
 }

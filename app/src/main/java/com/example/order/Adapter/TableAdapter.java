@@ -84,9 +84,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MenuViewHold
                 public void onClick(View v) {
 
                     int pos = getLayoutPosition();
-
                     maban = id.getText().toString();
-
 
                     //kiem tra trang thai cua ban da duoc dat chua
                     XuLyBanAn xlBanAn = new XuLyBanAn(context);
@@ -96,19 +94,16 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MenuViewHold
 
                     int tb = status.getInt(2);
                     if (tb == 0) {
-
                         Intent i = new Intent(context, Order_Activity.class);
                         i.putExtra("mabanan", id);
                         i.putExtra("vitriban", pos);
-
                         context.startActivity(i);
                     } else {
-                        Toast.makeText(context, "Ban nay da duoc dat " + maban, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Ban nay da duoc dat!!! ", Toast.LENGTH_SHORT).show();
                     }
 
                 }
             });
-
 
             btnedit = (Button) itemView.findViewById(R.id.btn_edit_table);
             btnedit.setOnClickListener(new View.OnClickListener() {

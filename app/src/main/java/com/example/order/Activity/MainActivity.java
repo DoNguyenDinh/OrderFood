@@ -33,16 +33,17 @@ public class MainActivity extends AppCompatActivity {
     private List<Menu> mlistFood = new ArrayList<>();
     public static String idTable;
     public final static String titleTable = "Table";
-    public static String idStaff,nameStaff;
+    public static String idStaff, nameStaff;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         anhxa();
+
+        Toast.makeText(this, "Ma nhan vien" + LoginActivity.ma_nhan_vien, Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -54,9 +55,7 @@ public class MainActivity extends AppCompatActivity {
         mviewPager.setAdapter(viewPagerAdapter);
         mtabLayout.setupWithViewPager(mviewPager);
 
-
     }
-
 
     @SuppressLint("ResourceType")
     public void table_Order(View view) {
@@ -71,11 +70,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
 
-        manv= bundle.getString("idLogin");
+        manv = bundle.getString("idLogin");
         name = bundle.getString("nameLogin");
 
     }
-
 
     //mở activity thêm món ăn
     public void newFood(View view) {
@@ -92,15 +90,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //mỏ activity đăng nhập
-    public void logout(View view) {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
-    }
-
 
     //thanh toán tiền hóa đơn
     public void payMoney(View view) {
-     startActivity(new Intent(MainActivity.this,PayActivity.class));
+        startActivity(new Intent(MainActivity.this, PayActivity.class));
+    }
+
+    public void logOut(View view) {
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        LoginActivity.ma_nhan_vien = 0;
+        LoginActivity.ten_nv = "";
+
     }
 }

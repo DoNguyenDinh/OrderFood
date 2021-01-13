@@ -36,7 +36,6 @@ public class MenuFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,26 +44,24 @@ public class MenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
         rvMenu = (RecyclerView) view.findViewById(R.id.rv_menufood);
-        //menuAdapter = new MenuAdapter(getContext(), menuList);
 
         LoadFoodAndStyleAdapter food=new LoadFoodAndStyleAdapter(getContext(),listStyle);
         rvMenu.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMenu.setAdapter(food);
         rvMenu.setHasFixedSize(true);
 
-
         return view;
     }
 
+
+    //khoi tao gia tri cho danh sach mon an
     private void initData() {
         menuList = new ArrayList<>();
         XuLyMonAn xl = new XuLyMonAn(getContext());
 
         //lay danh sach ban tu database
         menuList = xl.selectListMenu();
-
         listStyle=xl.selectListFoodStyle();
-
 
     }
 
