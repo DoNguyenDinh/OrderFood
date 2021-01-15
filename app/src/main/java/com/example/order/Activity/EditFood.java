@@ -31,17 +31,14 @@ public class EditFood extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_food);
-
         anhxa();
         setDataView();
     }
 
     private void setDataView() {
         getData();
-
         edtNameFood.setText(name);
         edtPriceFood.setText(price);
-
         Bitmap bm = BitmapFactory.decodeByteArray(img, 0, img.length);
         imgFood.setImageBitmap(bm);
 

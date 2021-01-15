@@ -26,7 +26,6 @@ public class EditTypeFood extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_typefood);
-
         anhxa();
         setDataView();
     }
@@ -36,7 +35,6 @@ public class EditTypeFood extends AppCompatActivity {
         btnCancel = (Button) findViewById(R.id.btn_cancel_editType);
         edtNameType = (EditText) findViewById(R.id.edt_nameStyle);
         setDataView();
-
     }
 
     private void setDataView() {
@@ -61,11 +59,11 @@ public class EditTypeFood extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Ban chua nhap ten loai", Toast.LENGTH_SHORT).show();
         } else {
 
-            if (checkNameStyle(s)) {
-
-                Toast.makeText(getApplicationContext(), "Ten nay da ton tai", Toast.LENGTH_SHORT).show();
-
-            } else {
+//            if (checkNameStyle(s)) {
+//
+//                Toast.makeText(getApplicationContext(), "Ten nay da ton tai", Toast.LENGTH_SHORT).show();
+//
+//            } else {
                 XuLyMonAn xl = new XuLyMonAn(getApplicationContext());
 
                 int id = xl.getIDFoodStyle(nameStyle);
@@ -77,10 +75,8 @@ public class EditTypeFood extends AppCompatActivity {
                     startActivity(new Intent(this, MainActivity.class));
                 } else {
                     Toast.makeText(getApplicationContext(), "cap nhat that  bai ", Toast.LENGTH_SHORT).show();
-
                 }
-            }
-
+            //}
         }
     }
 

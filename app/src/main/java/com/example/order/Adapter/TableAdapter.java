@@ -53,7 +53,6 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MenuViewHold
         holder.mNameTable.setText(mMenu.getNameTable());
         holder.id.setText(mMenu.getId() + "");
 
-
     }
 
 
@@ -67,11 +66,8 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MenuViewHold
 
         private TextView mNameTable;
         private TextView id;
-        Context ct;
+
         Button btnedit;
-
-        int idTable;
-
 
         public MenuViewHolder(@NonNull View itemView) {
             super(itemView);

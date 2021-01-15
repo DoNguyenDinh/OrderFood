@@ -34,15 +34,11 @@ public class Order_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
-
         RecyclerView rv = findViewById(R.id.rv_table);
         RecyclerView rv_menu = findViewById(R.id.rv_dsmonan);
-
         tableChoose = (TextView) findViewById(R.id.txt_);
-
         xl = new XuLyMonAn(getApplicationContext());
         menuList = xl.selectListMenu();
-
         MenuAdapter menuAdapter = new MenuAdapter(this, menuList);
         rv_menu.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rv_menu.setAdapter(menuAdapter);
@@ -65,7 +61,6 @@ public class Order_Activity extends AppCompatActivity {
     //load danh sach monan
     private void initData() {
         menuList = new ArrayList<>();
-
         xl = new XuLyMonAn(getApplicationContext());
         //lay danh sach mon an tu database
         menuList = xl.selectListMenu();

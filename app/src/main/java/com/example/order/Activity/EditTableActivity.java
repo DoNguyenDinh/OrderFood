@@ -53,19 +53,12 @@ public class EditTableActivity extends AppCompatActivity {
 
     public void deleteTable(View view) {
         String name = edtName.getText().toString();
-
         xlBanAn.deleteTabele(name);
-
         Toast.makeText(getApplicationContext(), "Xoa thanh cong: ", Toast.LENGTH_SHORT).show();
-
-
         Intent i = new Intent(EditTableActivity.this, MainActivity.class);
-
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
-
         startActivity(i);
-
     }
 
     String nameTable;
@@ -74,19 +67,15 @@ public class EditTableActivity extends AppCompatActivity {
     void getData() {
         Bundle bundle = getIntent().getExtras();
         nameTable = bundle.getString("tenbanan");
-
     }
 
     public void canel_editTable(View view) {
         startActivity(new Intent(this, MainActivity.class));
     }
 
-
     public  boolean checkTableName(String userName) {
 
         listTable = new ArrayList<>();
-
-
         xlBanAn = new XuLyBanAn(getApplicationContext());
         listTable = xlBanAn.selectlistNameTable(userName);
         if (listTable.size() == 0) {
@@ -103,16 +92,14 @@ public class EditTableActivity extends AppCompatActivity {
         int id = Integer.parseInt(cs.getString(0));
         String name = edtName.getText().toString();
 
-        if (checkTableName(name)) {
-            Toast.makeText(getApplicationContext(), "ban nay da ton tai ", Toast.LENGTH_SHORT).show();
-
-        } else {
+//        if (checkTableName(name)) {
+//            Toast.makeText(getApplicationContext(), "ban nay da ton tai ", Toast.LENGTH_SHORT).show();
+//
+//        } else {
             xlBanAn.updateTableName(name, id);
             startActivity(new Intent(this, MainActivity.class));
             Toast.makeText(getApplicationContext(), "Cap nhat ban an thanh cong ", Toast.LENGTH_SHORT).show();
 
-        }
-
-
+       // }
     }
 }
