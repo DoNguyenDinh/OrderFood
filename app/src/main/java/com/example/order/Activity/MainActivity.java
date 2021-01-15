@@ -42,9 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         anhxa();
 
-        Toast.makeText(this, "Ma nhan vien" + LoginActivity.ma_nhan_vien, Toast.LENGTH_SHORT).show();
-
-
+//        Toast.makeText(this, "Ma nhan vien" + LoginActivity.ma_nhan_vien, Toast.LENGTH_SHORT).show();
     }
 
     private void anhxa() {
@@ -65,15 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //lấy id nhân viên đăng nhập
-    void getData(String name, String manv) {
-        Intent intent = getIntent();
-        Bundle bundle = getIntent().getExtras();
-
-        manv = bundle.getString("idLogin");
-        name = bundle.getString("nameLogin");
-
-    }
 
     //mở activity thêm món ăn
     public void newFood(View view) {

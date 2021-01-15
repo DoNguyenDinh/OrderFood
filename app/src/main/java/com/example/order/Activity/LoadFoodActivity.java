@@ -31,7 +31,6 @@ public class LoadFoodActivity extends AppCompatActivity {
 
         getData();
         setTitle(nameStyle);
-        Toast.makeText(getApplicationContext(), "ten ma loai mon" + nameStyle, Toast.LENGTH_SHORT).show();
 
         init();
 
@@ -41,7 +40,6 @@ public class LoadFoodActivity extends AppCompatActivity {
     void getData() {
         Bundle bundle = getIntent().getExtras();
         nameStyle = bundle.getString("tenloai");
-
     }
 
     LoadFoodAdapter foodAdapter;

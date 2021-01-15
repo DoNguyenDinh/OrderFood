@@ -35,7 +35,6 @@ public class InputValues extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.input_values);
-
         getData();
         anhxa();
 
@@ -47,7 +46,6 @@ public class InputValues extends AppCompatActivity {
         txtNameFood = (TextView) findViewById(R.id.txt_showNameFood);
         txtIDFood = (TextView) findViewById(R.id.txt_idFood_input);
 
-
         setDataView();
 
     }
@@ -57,22 +55,19 @@ public class InputValues extends AppCompatActivity {
         int idfood = Integer.parseInt(idFood);
         int quantity = Integer.parseInt(edtQuantity.getText().toString());
 
-
         XuLyBanAn xlBanAn = new XuLyBanAn(getApplicationContext());
         XuLyDatMon xlDatMon = new XuLyDatMon(getApplicationContext());
         XuLyMonAn xlMonAn = new XuLyMonAn(getApplicationContext());
 
         OrderDetail detail = insertData(idOrder, idfood, quantity);
 
-      //kiem tra mon an da ton tai trong order chua
+
         List<String> n = new ArrayList<>();
         n = xlDatMon.selectListFoodOrdered(idOrder, idfood);
-        Toast.makeText(getApplicationContext(), "check: " + n.size(), Toast.LENGTH_SHORT).show();
 
         if (n.size() > 0) {
             xlMonAn.updateQuantityFood(idOrder, quantity, idfood);
             Toast.makeText(getApplicationContext(), "cap nhat so luong thanh cong", Toast.LENGTH_SHORT).show();
-
             startActivity(new Intent(this, MainActivity.class));
 
         } else {

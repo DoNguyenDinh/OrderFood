@@ -59,9 +59,8 @@ public class XuLyDangNhap {
     //lay danh sach ten dang nhap
     public List<String> selectListNameUser(String userName) {
 
-        String query_selectall = "Select * from " + dbManager.TB_STAFF + " where tennv='" + userName + "'";
+        String query_selectall = "Select * from " + dbManager.TB_STAFF + " where "+dbManager.USER_NAME+"='" + userName + "'";
         List<String> listUserName = new ArrayList<>();
-
 
         Cursor cursor = db.rawQuery(query_selectall, null);
 

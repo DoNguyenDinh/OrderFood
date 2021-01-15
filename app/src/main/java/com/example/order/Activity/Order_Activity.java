@@ -74,9 +74,8 @@ public class Order_Activity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         maban = bundle.getInt("mabanan");
         Toast.makeText(this, "ma ban" + maban, Toast.LENGTH_SHORT).show();
-        tableChoose.setText("Please choose food and drink " + "( " + maban + ")");
+        tableChoose.setText("Vui long chon do an va nuoc uong " + "( " + maban + ")");
     }
-
 
     //them moi dat mon
     public void newOrder(View view) {

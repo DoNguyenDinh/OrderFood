@@ -73,7 +73,7 @@ public class EditTableActivity extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
     }
 
-    public  boolean checkTableName(String userName) {
+    public boolean checkTableName(String userName) {
 
         listTable = new ArrayList<>();
         xlBanAn = new XuLyBanAn(getApplicationContext());
@@ -92,14 +92,9 @@ public class EditTableActivity extends AppCompatActivity {
         int id = Integer.parseInt(cs.getString(0));
         String name = edtName.getText().toString();
 
-//        if (checkTableName(name)) {
-//            Toast.makeText(getApplicationContext(), "ban nay da ton tai ", Toast.LENGTH_SHORT).show();
-//
-//        } else {
-            xlBanAn.updateTableName(name, id);
-            startActivity(new Intent(this, MainActivity.class));
-            Toast.makeText(getApplicationContext(), "Cap nhat ban an thanh cong ", Toast.LENGTH_SHORT).show();
+        xlBanAn.updateTableName(name, id);
+        startActivity(new Intent(this, MainActivity.class));
+        Toast.makeText(getApplicationContext(), "Cap nhat ban an thanh cong ", Toast.LENGTH_SHORT).show();
 
-       // }
     }
 }

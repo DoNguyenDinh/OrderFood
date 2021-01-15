@@ -61,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
             boolean checkUser=checkUserName(name);
             if (checkUser) {
 
-
                 if (xuLyDangNhap.checkPass(name,pass)){
                     Intent i = new Intent(this, MainActivity.class);
 

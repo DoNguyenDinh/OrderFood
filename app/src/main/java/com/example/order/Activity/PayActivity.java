@@ -54,8 +54,7 @@ public class PayActivity extends AppCompatActivity {
         rv_pay.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rv_pay.setAdapter(p);
 
-        Toast.makeText(this, "ma dat mon an: " + iddatmon, Toast.LENGTH_SHORT).show();
-
+       // Toast.makeText(this, "ma dat mon an: " + iddatmon, Toast.LENGTH_SHORT).show();
 
     }
 

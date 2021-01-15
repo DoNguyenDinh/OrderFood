@@ -28,8 +28,6 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_layout);
-        DBManager db = new DBManager(getApplicationContext());
-
         anhxa();
         setTitle(R.string.register);
     }

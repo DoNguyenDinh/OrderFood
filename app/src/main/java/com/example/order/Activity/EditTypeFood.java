@@ -58,12 +58,6 @@ public class EditTypeFood extends AppCompatActivity {
         if (s.matches("")) {
             Toast.makeText(getApplicationContext(), "Ban chua nhap ten loai", Toast.LENGTH_SHORT).show();
         } else {
-
-//            if (checkNameStyle(s)) {
-//
-//                Toast.makeText(getApplicationContext(), "Ten nay da ton tai", Toast.LENGTH_SHORT).show();
-//
-//            } else {
                 XuLyMonAn xl = new XuLyMonAn(getApplicationContext());
 
                 int id = xl.getIDFoodStyle(nameStyle);
@@ -76,7 +70,7 @@ public class EditTypeFood extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "cap nhat that  bai ", Toast.LENGTH_SHORT).show();
                 }
-            //}
+
         }
     }
 

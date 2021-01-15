@@ -68,7 +68,7 @@ public class DetailOrderActivity extends AppCompatActivity {
         i.putExtra("madatmon", madatmon);
         startActivity(i);
 
-        Toast.makeText(getApplicationContext(), "ma dat mon: " + madatmon, Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(getApplicationContext(), "ma dat mon: " + madatmon, Toast.LENGTH_SHORT).show();
 
     }
 

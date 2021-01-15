@@ -76,7 +76,7 @@ public class NewFoodActivity extends AppCompatActivity {
         spnFoodStyle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "ten loai mon an " + listFoodStyle.get(position), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getApplicationContext(), "ten loai mon an " + listFoodStyle.get(position), Toast.LENGTH_SHORT).show();
 
                 nameStyle = listFoodStyle.get(position);
             }
