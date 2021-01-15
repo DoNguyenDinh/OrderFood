@@ -50,7 +50,7 @@ public class Order_Activity extends AppCompatActivity {
     }
 
 
-
+//quay tro lai main
     public void back_activitymain(View view) {
 
         Intent i = new Intent(this, MainActivity.class);

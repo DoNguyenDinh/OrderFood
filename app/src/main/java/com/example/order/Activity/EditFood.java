@@ -41,7 +41,6 @@ public class EditFood extends AppCompatActivity {
         edtPriceFood.setText(price);
         Bitmap bm = BitmapFactory.decodeByteArray(img, 0, img.length);
         imgFood.setImageBitmap(bm);
-
     }
 
     String name, price, id;

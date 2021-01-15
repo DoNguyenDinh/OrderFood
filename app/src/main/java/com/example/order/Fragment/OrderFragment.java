@@ -17,6 +17,7 @@ import com.example.order.Data.DBManager;
 import com.example.order.Menu;
 import com.example.order.Order;
 import com.example.order.R;
+import com.example.order.XuLy.XuLyDatMon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +43,10 @@ public class OrderFragment extends Fragment {
 
     private void initData() {
         orderList = new ArrayList<>();
-        DBManager dbManager = new DBManager(getContext());
+        XuLyDatMon xlDatMon=new XuLyDatMon(getContext());
 
         //lay danh sach ban tu database
-        orderList = dbManager.selectListOrdered();
+        orderList = xlDatMon.selectListOrdered();
     }
 
     @Nullable

@@ -32,7 +32,6 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     //table chitietdatmon
-
     public static String TB_ORDER_DETAIL = "chitietdatmon";
     public static String ID_ORDER_ORDER = "madatmonan";
     public static String ID_FOOD_ORDER = "mamonan";
@@ -119,7 +118,6 @@ public class DBManager extends SQLiteOpenHelper {
 
     }
 
-
     String DROP_ORDER_DETAIL = "DROP TABLE IF EXISTS " + TB_ORDER_DETAIL;
     String DROP_ORDER = "DROP TABLE IF EXISTS " + TB_ORDER;
     String DROP_STAFF = "DROP TABLE IF EXISTS " + TB_STAFF;
@@ -147,86 +145,6 @@ public class DBManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db;
     }
-
-
-    //lay danh sach da dat mon
-    public List<Order> selectListOrdered() {
-        String query_selectall = "Select * from " + TB_ORDER + " where " + STATUS_ORDER + " = 1";
-        List<Order> listTable = new ArrayList<>();
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query_selectall, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Order table = new Order();
-
-                table.setId(cursor.getInt(0));
-                table.setIdTable(Integer.parseInt(cursor.getString(1)));
-
-                listTable.add(table);
-            } while (cursor.moveToNext());
-        }
-        db.close();
-        return listTable;
-    }
-
-
-    //cap nhat trang thai dat mon
-    public void updateStatusorder(int iddatmon) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-
-        String update_db = "update " + TB_ORDER + " set " + STATUS_ORDER + "= 0 where " + ID_ORDER + " = " + iddatmon;
-        db.execSQL(update_db);
-
-    }
-
-
-    //tao nguoi dung moi
-    public long addNewUser(Staff staff) {
-        //mo ket noi database
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        //luu gia tri xuong database
-        ContentValues values = new ContentValues();
-        values.put(USER_NAME, staff.getUserName());
-        values.put(PASS_STAFF, staff.getPassword());
-        values.put(STAFF_NAME, staff.getNameStaff());
-        long ck = db.insert(TB_STAFF, null, values);
-
-        //dong ket noi
-        db.close();
-        return ck;
-    }
-
-
-    //lay thong tin dang nhap cua nguoi dung
-    public List<Staff> getAccount(String username, String pass) {
-
-        String query_selectall = "Select * from " + TB_STAFF + " where " + USER_NAME + "= '" +
-                username + "' and " + PASS_STAFF + " = '" + pass + "'";
-        List<Staff> listStaff = new ArrayList<>();
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query_selectall, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Staff staff = new Staff();
-
-                staff.setId(cursor.getInt(0));
-                staff.setUserName(cursor.getString(1));
-                staff.setPassword(cursor.getString(2));
-                staff.setNameStaff(cursor.getString(3));
-
-                listStaff.add(staff);
-            } while (cursor.moveToNext());
-        }
-        db.close();
-        return listStaff;
-    }
-
 
 
 }

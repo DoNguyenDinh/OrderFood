@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin, btnSignup;
     List<Staff> staffList;
     public static int ma_nhan_vien = 0;
-    public static String ten_nv="";
+    public static String ten_nv = "";
 
 
     @Override
@@ -41,8 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     public List<Staff> getListStaff(String username, String pass) {
 
         staffList = new ArrayList<>();
-        DBManager db = new DBManager(getApplicationContext());
-        staffList = db.getAccount(username, pass);
+        XuLyDangNhap xuLyDangNhap = new XuLyDangNhap(getApplicationContext());
+        staffList = xuLyDangNhap.getAccount(username, pass);
 
         return staffList;
     }
@@ -58,10 +58,10 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "chua nhap", Toast.LENGTH_SHORT).show();
         } else {
 
-            boolean checkUser=checkUserName(name);
+            boolean checkUser = checkUserName(name);
             if (checkUser) {
 
-                if (xuLyDangNhap.checkPass(name,pass)){
+                if (xuLyDangNhap.checkPass(name, pass)) {
                     Intent i = new Intent(this, MainActivity.class);
 
                     //lay thong tin dang nhap cua nhan vien
@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Chao mung ban : " + ten_nv, Toast.LENGTH_SHORT).show();
                     startActivity(i);
 
-                }else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Sai mat khau !!!!", Toast.LENGTH_SHORT).show();
                 }
 
@@ -90,17 +90,15 @@ public class LoginActivity extends AppCompatActivity {
         btnSignup = (Button) findViewById(R.id.btn_signup_login);
     }
 
-    List<String>listUser;
+    List<String> listUser;
+
     //kiem tra username da ton tai chua
-    public boolean checkUserName(String userName){
+    public boolean checkUserName(String userName) {
 
-        listUser=new ArrayList<>();
-
-
-        XuLyDangNhap xuLyDangNhap=new XuLyDangNhap(getApplicationContext());
-
-        listUser= xuLyDangNhap.selectListNameUser(userName);
-        if (listUser.size()==0){
+        listUser = new ArrayList<>();
+        XuLyDangNhap xuLyDangNhap = new XuLyDangNhap(getApplicationContext());
+        listUser = xuLyDangNhap.selectListNameUser(userName);
+        if (listUser.size() == 0) {
             return false;
         }
         return true;

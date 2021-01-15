@@ -21,7 +21,6 @@ public class XuLyBanAn {
         db = dbManager.openCon();
     }
 
-
     //them moi ban an
     public long addTableFood(Table table) {
 
@@ -30,8 +29,6 @@ public class XuLyBanAn {
         values.put(dbManager.NAME_TABLE, table.getNameTable());
         long result = db.insert(dbManager.TB_TABLEFOOD, null, values);
 
-        //dong ket noi
-        // db.close();
         return result;
     }
 
@@ -77,7 +74,7 @@ public class XuLyBanAn {
                 listTable.add(table);
             } while (cursor.moveToNext());
         }
-        // db.close();
+
         return listTable;
     }
 
@@ -96,7 +93,7 @@ public class XuLyBanAn {
                 listUserName.add(cursor.getString(1));
             } while (cursor.moveToNext());
         }
-        // db.close();
+
         return listUserName;
     }
 
@@ -119,7 +116,6 @@ public class XuLyBanAn {
     //xoa ban an
     public void deleteTabele(String nameTable) {
         db.delete(dbManager.TB_TABLEFOOD, " tenbanan =?", new String[]{nameTable});
-
     }
 
     //lay id ban an
@@ -137,7 +133,7 @@ public class XuLyBanAn {
 
         String update_db = "update " + dbManager.TB_TABLEFOOD + " set " + dbManager.NAME_TABLE + "= '" + nameTable + "' where " + dbManager.ID_TABLE + " = " + id;
         db.execSQL(update_db);
-//        db.close();
+//
 
     }
 

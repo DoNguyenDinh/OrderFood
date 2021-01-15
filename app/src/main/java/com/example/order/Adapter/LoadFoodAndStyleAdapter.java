@@ -2,7 +2,6 @@ package com.example.order.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.order.Activity.EditTypeFood;
 import com.example.order.Activity.LoadFoodActivity;
 import com.example.order.Activity.MainActivity;
-import com.example.order.FoodStyle;
+import com.example.order.TypeFood;
 import com.example.order.Menu;
 import com.example.order.R;
 import com.example.order.XuLy.XuLyMonAn;
@@ -26,12 +24,12 @@ import java.util.List;
 
 public class LoadFoodAndStyleAdapter extends RecyclerView.Adapter<LoadFoodAndStyleAdapter.LoadViewHolder> {
 
-    private List<FoodStyle> menuList;
+    private List<TypeFood> menuList;
     Context context;
     List<Menu> listFood;
 
 
-    public LoadFoodAndStyleAdapter(Context mtexfood, List<FoodStyle> mlistMenu) {
+    public LoadFoodAndStyleAdapter(Context mtexfood, List<TypeFood> mlistMenu) {
         this.menuList = mlistMenu;
         this.context = mtexfood;
 
@@ -49,7 +47,7 @@ public class LoadFoodAndStyleAdapter extends RecyclerView.Adapter<LoadFoodAndSty
     @Override
     public void onBindViewHolder(@NonNull LoadViewHolder holder, int position) {
 
-        FoodStyle food = menuList.get(position);
+        TypeFood food = menuList.get(position);
         holder.btn.setText(food.getNameFoodStyle() + "");
     }
 

@@ -33,8 +33,6 @@ public class XuLyDatMon {
         values.put(dbManager.QUANTITY, detail.getQuantityFood());
         long result = db.insert(dbManager.TB_ORDER_DETAIL, null, values);
 
-        //db.close();
-
         return result;
     }
 
@@ -99,7 +97,7 @@ public class XuLyDatMon {
                 listInfo.add(staff);
             } while (cursor.moveToNext());
         }
-        // db.close();
+
         return listInfo;
     }
 
@@ -107,7 +105,6 @@ public class XuLyDatMon {
     public void deleteFoodOrder(int madatmon, int mamonan) {
 
         db.delete(dbManager.TB_ORDER_DETAIL, " madatmonan =? and mamonan=?", new String[]{madatmon + "", mamonan + ""});
-
     }
 
 
@@ -119,8 +116,6 @@ public class XuLyDatMon {
                 "INNER JOIN chitietdatmon on chitietdatmon.madatmonan=" + iddatmon + " and chitietdatmon.mamonan=thucdon.mamonan";
 
         List<ShowOrder> listInfo = new ArrayList<>();
-
-
         Cursor cursor = db.rawQuery(query_selectall, null);
 
         if (cursor.moveToFirst()) {
@@ -133,7 +128,7 @@ public class XuLyDatMon {
                 listInfo.add(staff);
             } while (cursor.moveToNext());
         }
-        //db.close();
+
         return listInfo;
     }
 
@@ -145,14 +140,28 @@ public class XuLyDatMon {
                 " = 1 " + " order by madatmon desc limit 1";
         Cursor cs = db.rawQuery(sql, null);
 
-
         return cs;
     }
+
+
+
+    //them dat mon moi
+    public long addOrder(Order table) {
+
+        //luu gia tri xuong database
+        ContentValues values = new ContentValues();
+        values.put(dbManager.ID_TABLE_ORDER, table.getIdTable());
+        long result = db.insert(dbManager.TB_ORDER, null, values);
+
+        return result;
+    }
+
 
     //lay danh sach da dat mon
     public List<Order> selectListOrdered() {
         String query_selectall = "Select * from " + dbManager.TB_ORDER + " where " + dbManager.STATUS_ORDER + " = 1";
         List<Order> listTable = new ArrayList<>();
+
 
         Cursor cursor = db.rawQuery(query_selectall, null);
 
@@ -166,20 +175,16 @@ public class XuLyDatMon {
                 listTable.add(table);
             } while (cursor.moveToNext());
         }
-        //db.close();
+
         return listTable;
     }
 
-    //them dat mon moi
-    public long addOrder(Order table) {
+    //cap nhat trang thai dat mon
+    public void updateStatusorder(int iddatmon) {
 
-        //luu gia tri xuong database
-        ContentValues values = new ContentValues();
-        values.put(dbManager.ID_TABLE_ORDER, table.getIdTable());
-        long result = db.insert(dbManager.TB_ORDER, null, values);
+        String update_db = "update " + dbManager.TB_ORDER + " set " + dbManager.STATUS_ORDER + "= 0 where " + dbManager.ID_ORDER + " = " + iddatmon;
+        db.execSQL(update_db);
 
-        //dong ket noi
-       // db.close();
-        return result;
     }
+
 }

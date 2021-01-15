@@ -13,24 +13,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.order.Data.DBManager;
-import com.example.order.Fragment.MenuFragment;
 import com.example.order.Menu;
 import com.example.order.R;
-import com.example.order.Table;
 import com.example.order.XuLy.XuLyMonAn;
 
 import java.io.ByteArrayOutputStream;
@@ -155,7 +148,7 @@ public class NewFoodActivity extends AppCompatActivity {
     }
 
     public void btn_addNewFoodStyle(View view) {
-        startActivity(new Intent(this, NewFoodStyleActivity.class));
+        startActivity(new Intent(this, NewFoodTypeActivity.class));
     }
 
     public void chooseImage(View view) {

@@ -62,6 +62,8 @@ public class PayActivity extends AppCompatActivity {
         getData();
     }
 
+
+    //quay tro lai main
     public void back_activitymain_pay(View view) {
         startActivity(new Intent(this, MainActivity.class));
     }
@@ -81,11 +83,10 @@ public class PayActivity extends AppCompatActivity {
 
     public void thanhtoan(View view) {
 
-        DBManager db = new DBManager(getApplicationContext());
-
         xlbanAn = new XuLyBanAn(getApplicationContext());
+        XuLyDatMon xuLyDatMon =new XuLyDatMon(getApplicationContext());
         int iddatmon = Integer.parseInt(txt);
-        db.updateStatusorder(iddatmon);
+        xuLyDatMon.updateStatusorder(iddatmon);
 
         Toast.makeText(this, "Thanh toan thanh cong", Toast.LENGTH_SHORT).show();
 

@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.order.Data.DBManager;
-import com.example.order.FoodStyle;
+import com.example.order.TypeFood;
 import com.example.order.Menu;
 
 import java.util.ArrayList;
@@ -34,9 +34,6 @@ public class XuLyMonAn {
         values.put(dbManager.IMAGE_FOOD, table.getImg());
         long result = db.insert(dbManager.TB_MENU, null, values);
 
-        //dong ket noi
-     //   db.close();
-
         return result;
     }
 
@@ -57,7 +54,6 @@ public class XuLyMonAn {
 
         String sql = "Select * from " + dbManager.TB_MENU + " where " + dbManager.NAME_FOOD + " = '" + namefood + "'";
         Cursor cs = db.rawQuery(sql, null);
-
         return cs;
     }
 
@@ -80,7 +76,7 @@ public class XuLyMonAn {
 
             } while (cursor.moveToNext());
         }
-       // db.close();
+
         return listMenu;
     }
 
@@ -98,15 +94,12 @@ public class XuLyMonAn {
 
 
     //them loai mon an moi
-    public long addFoodStyle(FoodStyle food) {
+    public long addFoodStyle(TypeFood food) {
 
         //luu gia tri xuong database
         ContentValues values = new ContentValues();
         values.put(dbManager.NAME_FOOD_TYPE, food.getNameFoodStyle());
         long result = db.insert(dbManager.TB_FOOD_TYPE, null, values);
-
-        //dong ket noi
-     //   db.close();
 
         return result;
     }
@@ -129,23 +122,21 @@ public class XuLyMonAn {
     }
 
     //lay danh sach loai mon an
-    public List<FoodStyle> selectListFoodStyle() {
+    public List<TypeFood> selectListFoodStyle() {
 
         String select = "Select * from " + dbManager.TB_FOOD_TYPE;
-        List<FoodStyle> list = new ArrayList<>();
+        List<TypeFood> list = new ArrayList<>();
 
         Cursor cs = db.rawQuery(select, null);
         if (cs.moveToFirst()) {
             do {
-                FoodStyle food = new FoodStyle();
+                TypeFood food = new TypeFood();
                 food.setNameFoodStyle(cs.getString(1));
                 food.setId(cs.getInt(0));
                 list.add(food);
             } while (cs.moveToNext());
         }
 
-
-       // db.close();
         return list;
     }
 
@@ -170,13 +161,12 @@ public class XuLyMonAn {
                 listMenu.add(menu);
             } while (cursor.moveToNext());
         }
-        //db.close();
+
         return listMenu;
     }
 
 
-    //xoa loai mon an theo loai
-
+    //xoa loai mon an theo ten loai
     public void deleteTypeFood(String nameType) {
         db.delete(dbManager.TB_FOOD_TYPE, dbManager.NAME_FOOD_TYPE + " =? ", new String[]{nameType});
     }

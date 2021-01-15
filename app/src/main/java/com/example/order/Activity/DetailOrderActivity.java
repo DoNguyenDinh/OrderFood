@@ -48,7 +48,6 @@ public class DetailOrderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
 
-        //String txt = bundle.getString("madatmon");
         madatmon = bundle.getInt("madatmon");
         maban = bundle.getInt("maban");
 
@@ -67,8 +66,6 @@ public class DetailOrderActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), AddFoodOrder.class);
         i.putExtra("madatmon", madatmon);
         startActivity(i);
-
-     //   Toast.makeText(getApplicationContext(), "ma dat mon: " + madatmon, Toast.LENGTH_SHORT).show();
 
     }
 
